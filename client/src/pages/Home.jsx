@@ -1,0 +1,300 @@
+import React, { useEffect, useState } from "react";
+import Layout from "../components/Layout";
+import { IoIosStar } from "react-icons/io";
+import { IoIosStarHalf } from "react-icons/io";
+import { Carousel } from "react-responsive-carousel";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { useSelector } from "react-redux";
+
+const Home = () => {
+  const [products, setProducts] = useState([]);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchProduct = async () => {
+      const { data } = await axios.get(
+        `${import.meta.env.VITE_BASE_URL}/api/product/all-products`
+      );
+      if (data) {
+        setProducts(data.product);
+      }
+    };
+    fetchProduct();
+  }, []);
+
+  return (
+    <Layout>
+      <div className="w-full px-4 md:px-10 mt-10">
+        <div className="top w-full">
+          {/* <Carousel axis="horizontal" autoPlay="true" autoFocus="true"> */}
+          <div>
+            <img src="/img/homeBg.webp" className="w-full rounded-xl" alt="" />
+          </div>
+          {/* <div>
+              <img src="/img/homeBg.webp" className="rounded-xl" alt="" />
+            </div>
+            <div>
+              <img src="/img/homeBg.webp" className="rounded-xl" alt="" />
+            </div> */}
+          {/* </Carousel> */}
+        </div>
+        <div className="products mt-10">
+          <div>
+            <h2 className="text-2xl font-semibold my-8">Popular Products</h2>
+            <Link className="w-full grid md:grid-cols-4 sm:grid-cols-3 grid-cols-1 xl:grid-cols-5 gap-4">
+              {products?.map((product) => (
+                <Link
+                  to={`/details/${product._id}`}
+                  key={product._id}
+                  className="bg-gray-200/30 cursor-pointer rounded-xl p-4 flex flex-col gap-1"
+                >
+                  <img
+                    src={`http://localhost:8080/images/${product.image}`}
+                    className="xl:bg-transparent aspect-square bg-cover object-cover"
+                    alt=""
+                  />
+                  <h2>{product.title}</h2>
+                  <p>
+                    from <span>₹{product.price}</span>
+                  </p>
+                  <div className="flex gap-1 items-center text-emerald-500">
+                    <IoIosStar />
+                    <IoIosStar />
+                    <IoIosStar />
+                    <IoIosStar />
+                    <IoIosStarHalf />
+                    <span>(159)</span>
+                  </div>
+                </Link>
+              ))}
+              {/* <div className="bg-gray-200/30 cursor-pointer rounded-xl p-4 flex flex-col gap-1">
+                <img
+                  src="/img/pop2.webp"
+                  className="xl:bg-transparent"
+                  alt=""
+                />
+                <h2>Diabic Care Juice</h2>
+                <p>
+                  from <span>₹450</span>
+                </p>
+                <div className="flex gap-1 items-center text-emerald-500">
+                  <IoIosStar />
+                  <IoIosStar />
+                  <IoIosStar />
+                  <IoIosStar />
+                  <IoIosStarHalf />
+                  <span>(159)</span>
+                </div>
+              </div>
+              <div className="bg-gray-200/30 cursor-pointer rounded-xl p-4 flex flex-col gap-1">
+                <img
+                  src="/img/pop3.webp"
+                  className="xl:bg-transparent"
+                  alt=""
+                />
+                <h2>Diabic Care Juice</h2>
+                <p>
+                  from <span>₹450</span>
+                </p>
+                <div className="flex gap-1 items-center text-emerald-500">
+                  <IoIosStar />
+                  <IoIosStar />
+                  <IoIosStar />
+                  <IoIosStar />
+                  <IoIosStarHalf />
+                  <span>(159)</span>
+                </div>
+              </div>
+              <div className="bg-gray-200/30 cursor-pointer rounded-xl p-4 flex flex-col gap-1">
+                <img
+                  src="/img/pop4.webp"
+                  className="xl:bg-transparent"
+                  alt=""
+                />
+                <h2>Diabic Care Juice</h2>
+                <p>
+                  from <span>₹450</span>
+                </p>
+                <div className="flex gap-1 items-center text-emerald-500">
+                  <IoIosStar />
+                  <IoIosStar />
+                  <IoIosStar />
+                  <IoIosStar />
+                  <IoIosStarHalf />
+                  <span>(159)</span>
+                </div>
+              </div>
+              <div className="bg-gray-200/30 cursor-pointer rounded-xl p-4 flex flex-col gap-1">
+                <img
+                  src="/img/pop5.avif"
+                  className="xl:bg-transparent"
+                  alt=""
+                />
+                <h2>Diabic Care Juice</h2>
+                <p>
+                  from <span>₹450</span>
+                </p>
+                <div className="flex gap-1 items-center text-emerald-500">
+                  <IoIosStar />
+                  <IoIosStar />
+                  <IoIosStar />
+                  <IoIosStar />
+                  <IoIosStarHalf />
+                  <span>(159)</span>
+                </div>
+              </div>
+              <div className="bg-gray-200/30 cursor-pointer rounded-xl p-4 flex flex-col gap-1">
+                <img
+                  src="/img/pop4.webp"
+                  className="xl:bg-transparent"
+                  alt=""
+                />
+                <h2>Diabic Care Juice</h2>
+                <p>
+                  from <span>₹450</span>
+                </p>
+                <div className="flex gap-1 items-center text-emerald-500">
+                  <IoIosStar />
+                  <IoIosStar />
+                  <IoIosStar />
+                  <IoIosStar />
+                  <IoIosStarHalf />
+                  <span>(159)</span>
+                </div>
+              </div>
+              <div className="bg-gray-200/30 cursor-pointer rounded-xl p-4 flex flex-col gap-1">
+                <img
+                  src="/img/pop3.webp"
+                  className="xl:bg-transparent"
+                  alt=""
+                />
+                <h2>Diabic Care Juice</h2>
+                <p>
+                  from <span>₹450</span>
+                </p>
+                <div className="flex gap-1 items-center text-emerald-500">
+                  <IoIosStar />
+                  <IoIosStar />
+                  <IoIosStar />
+                  <IoIosStar />
+                  <IoIosStarHalf />
+                  <span>(159)</span>
+                </div>
+              </div>
+              <div className="bg-gray-200/30 cursor-pointer rounded-xl p-4 flex flex-col gap-1">
+                <img
+                  src="/img/pop5.avif"
+                  className="xl:bg-transparent"
+                  alt=""
+                />
+                <h2>Diabic Care Juice</h2>
+                <p>
+                  from <span>₹450</span>
+                </p>
+                <div className="flex gap-1 items-center text-emerald-500">
+                  <IoIosStar />
+                  <IoIosStar />
+                  <IoIosStar />
+                  <IoIosStar />
+                  <IoIosStarHalf />
+                  <span>(159)</span>
+                </div>
+              </div>
+              <div className="bg-gray-200/30 cursor-pointer rounded-xl p-4 flex flex-col gap-1">
+                <img
+                  src="/img/pop1.webp"
+                  className="xl:bg-transparent"
+                  alt=""
+                />
+                <h2>Diabic Care Juice</h2>
+                <p>
+                  from <span>₹450</span>
+                </p>
+                <div className="flex gap-1 items-center text-emerald-500">
+                  <IoIosStar />
+                  <IoIosStar />
+                  <IoIosStar />
+                  <IoIosStar />
+                  <IoIosStarHalf />
+                  <span>(159)</span>
+                </div>
+              </div>
+              <div className="bg-gray-200/30 cursor-pointer rounded-xl p-4 flex flex-col gap-1">
+                <img
+                  src="/img/pop2.webp"
+                  className="xl:bg-transparent"
+                  alt=""
+                />
+                <h2>Diabic Care Juice</h2>
+                <p>
+                  from <span>₹450</span>
+                </p>
+                <div className="flex gap-1 items-center text-emerald-500">
+                  <IoIosStar />
+                  <IoIosStar />
+                  <IoIosStar />
+                  <IoIosStar />
+                  <IoIosStarHalf />
+                  <span>(159)</span>
+                </div>
+              </div> */}
+            </Link>
+          </div>
+        </div>
+
+        <div className="w-full mt-10 mb-8">
+          <div>
+            <h2 className="my-8 text-2xl font-semibold">Popular Categories</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-4">
+              <div>
+                <img
+                  src="/img/cat1.webp"
+                  className="rounded-full w-2/3 md:w-full mx-auto cursor-pointer hover:transition-transform duration-300 hover:shadow-lg hover:-translate-y-1"
+                  alt=""
+                />
+              </div>
+              <div>
+                <img
+                  src="/img/cat2.webp"
+                  className="rounded-full w-2/3 md:w-full mx-auto cursor-pointer hover:transition-transform duration-300 hover:shadow-lg hover:-translate-y-1"
+                  alt=""
+                />
+              </div>
+              <div>
+                <img
+                  src="/img/cat3.webp"
+                  className="rounded-full w-2/3 md:w-full mx-auto cursor-pointer hover:transition-transform duration-300 hover:shadow-lg hover:-translate-y-1"
+                  alt=""
+                />
+              </div>
+              <div>
+                <img
+                  src="/img/cat4.webp"
+                  className="rounded-full w-2/3 md:w-full mx-auto cursor-pointer hover:transition-transform duration-300 hover:shadow-lg hover:-translate-y-1"
+                  alt=""
+                />
+              </div>
+              <div>
+                <img
+                  src="/img/cat5.webp"
+                  className="rounded-full w-2/3 md:w-full mx-auto cursor-pointer hover:transition-transform duration-300 hover:shadow-lg hover:-translate-y-1"
+                  alt=""
+                />
+              </div>
+              <div>
+                <img
+                  src="/img/cat6.webp"
+                  className="rounded-full w-2/3 md:w-full mx-auto cursor-pointer hover:transition-transform duration-300 hover:shadow-lg hover:-translate-y-1"
+                  alt=""
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Layout>
+  );
+};
+
+export default Home;
