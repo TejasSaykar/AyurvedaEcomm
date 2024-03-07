@@ -23,12 +23,6 @@ const EditNews = () => {
     <div>
       <>
         <div className="">
-          {categories.length === 0 && (
-            <h1 className="text-2xl w-full font-bold text-center">
-              No News to preview
-            </h1>
-          )}
-
           <div className="flex justify-between">
             <h4 className="mb-6 text-xl font-semibold text-black dark:text-white">
               Categories
@@ -41,14 +35,21 @@ const EditNews = () => {
             </button>
           </div>
 
-          {categories.map((items, i) => (
-            <CardOne
-              fetchCategories={fetchCategories}
-              key={i}
-              item={items}
-              type="category"
-            />
-          ))}
+          {categories.length < 1 && (
+            <h1 className="text-2xl w-full font-bold text-center pt-20">
+              No Categoties to preview
+            </h1>
+          )}
+
+          {categories.length > 0 &&
+            categories.map((items, i) => (
+              <CardOne
+                fetchCategories={fetchCategories}
+                key={i}
+                item={items}
+                type="category"
+              />
+            ))}
         </div>
       </>
     </div>

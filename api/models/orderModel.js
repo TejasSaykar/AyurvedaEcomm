@@ -11,6 +11,18 @@ const orderSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "user"
     },
+    phone: {
+        type: Number,
+        required: true
+    },
+    pincode: {
+        type: Number,
+        required: true
+    },
+    address: {
+        type: String,
+        required: true
+    },
     status: {
         type: String,
         default: "Not Process",

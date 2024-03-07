@@ -45,7 +45,7 @@ const CardOne = ({ item, type, fetchProducts }) => {
           </div>
           <div className="p-2.5 text-center xl:p-5">
             <h5 className="text-sm font-medium uppercase xsm:text-base">
-              Description
+              Quantity
             </h5>
           </div>
           <div className="hidden p-2.5 text-center sm:block xl:p-5">
@@ -71,7 +71,7 @@ const CardOne = ({ item, type, fetchProducts }) => {
           </div>
 
           <div className="hidden sm:flex items-center justify-center p-2.5 xl:p-5">
-            <p className="text-meta-3">{item.desc}...</p>
+            <p className="text-meta-3">{item.quantity}</p>
           </div>
 
           <div className="sm:items-center flex sm:justify-center sm:gap-4 ml-6 md:ml-0 py-2.5 sm:p-2.5 sm:flex xl:p-5">

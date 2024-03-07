@@ -15,18 +15,15 @@ const ProductDetail = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const fetchSingleProd = async () => {
-      const { data } = await axios.get(
-        `${import.meta.env.VITE_BASE_URL}/api/product/single-product/${id}`
-      );
-      if (data) {
-        setProduct(data.product);
-        // console.log("Single Product : ", data);
-      }
-    };
-    fetchSingleProd();
-  }, [id]);
+  const fetchSingleProd = async () => {
+    const { data } = await axios.get(
+      `${import.meta.env.VITE_BASE_URL}/api/product/single-product/${id}`
+    );
+    if (data) {
+      setProduct(data.product);
+      // console.log("Single Product : ", data);
+    }
+  };
 
   const addToCartProd = () => {
     dispatch(addToCart({ ...product, quantity }));
@@ -36,6 +33,10 @@ const ProductDetail = () => {
       // navigate("/");
     }, 3000);
   };
+
+  useEffect(() => {
+    fetchSingleProd();
+  }, [id, quantity, addToCartProd]);
 
   const handleQty = (cm) => {
     if (cm === "dec") {
@@ -48,8 +49,8 @@ const ProductDetail = () => {
 
   return (
     <Layout>
-      <div className="w-full">
-        <div className="w-full grid md:grid-cols-2 px-3 md:px-8">
+      <div className="w-full bg-[#FBFADA]">
+        <div className="w-full grid md:grid-cols-2 px-3 pt-10 md:px-8">
           <div className="left w-full">
             <img
               src={`http://localhost:8080/images/${product.image}`}
@@ -96,11 +97,23 @@ const ProductDetail = () => {
                     +
                   </span>
                 </div>
-                <div
-                  className="mt-5 md:mt-10 bg-orange-600 md:w-[70%] px-3 py-2 text-white text-center text-lg rounded-full cursor-pointer"
-                  onClick={addToCartProd}
-                >
-                  <button>Add To Cart</button>
+                <div className="mt-5 md:mt-10 md:w-[70%] text-white text-center text-lg rounded-full cursor-pointer">
+                  {product.quantity < 1 ? (
+                    <button
+                      disabled
+                      className="cursor-pointer w-full bg-yellow-600 px-6 py-2 rounded-full"
+                    >
+                      Out Of Stock
+                    </button>
+                  ) : (
+                    <button
+                      disabled={product.quantity < 1}
+                      onClick={addToCartProd}
+                      className="cursor-pointer w-full bg-orange-600 px-6 py-2 rounded-full"
+                    >
+                      Add To Cart
+                    </button>
+                  )}
                 </div>
 
                 <div className="text-center h-8 md:w-[70%] my-2">

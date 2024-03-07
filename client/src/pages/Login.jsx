@@ -41,7 +41,7 @@ const Login = () => {
 
   return (
     <Layout>
-      <div className="w-full sm:h-[80vh] flex bg-[#FBFADA] flex-col items-center">
+      <div className="w-full sm:h-[80vh] pt-10 flex bg-[#FBFADA] flex-col items-center">
         <div className="sm:w-1/3 lg:w-1/4 mx-auto p-4 md:mt-20 my-10 sm:my-0 rounded-md bg-white">
           <h2 className="text-3xl font-semibold text-center">Login</h2>
           <div className="flex flex-col gap-4">

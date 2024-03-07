@@ -12,6 +12,7 @@ const UpdateBlog = () => {
     category: '',
     price: '',
     review: '',
+    quantity: '',
     file: '',
   });
 
@@ -40,6 +41,7 @@ const UpdateBlog = () => {
           desc: input.description,
           category: input.category,
           price: input.price,
+          quantity: input.quantity,
           file: input.file,
         },
       );
@@ -104,6 +106,23 @@ const UpdateBlog = () => {
                       value={input.price}
                       onChange={(e) =>
                         setInput({ ...input, price: e.target.value })
+                      }
+                      className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                    />
+                  </div>
+                </div>
+
+                <div className="mb-4.5 w-full">
+                  <div className="mb-4.5 w-full">
+                    <label className="mb-2.5 block text-black dark:text-white">
+                      Quantity
+                    </label>
+                    <input
+                      type="number"
+                      placeholder="Quantity"
+                      value={input.quantity}
+                      onChange={(e) =>
+                        setInput({ ...input, quantity: e.target.value })
                       }
                       className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                     />

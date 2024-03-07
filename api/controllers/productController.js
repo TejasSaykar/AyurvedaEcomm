@@ -5,7 +5,7 @@ const productModel = require("../models/productModel");
 // Create Product
 exports.createProduct = async (req, res) => {
     try {
-        const product = await new productModel({ ...req.body }).save();
+        const product = await new productModel({ ...req.body, prevQty: req.body.quantity }).save();
         return res.status(200).json({
             success: true,
             message: "Product is created",
@@ -68,7 +68,7 @@ exports.singleProduct = async (req, res) => {
 exports.updateProduct = async (req, res) => {
     const id = req.params.id;
     try {
-        const product = await productModel.findByIdAndUpdate({ _id: id }, { $set: req.body }, { new: true });
+        const product = await productModel.findByIdAndUpdate({ _id: id }, { $set: req.body, prevQty: req.body.quantity }, { new: true });
         return res.status(200).json({
             success: true,
             message: "Product updated",
@@ -113,7 +113,7 @@ exports.productCategoryController = async (req, res) => {
     try {
         // const category = await categoryModel.findOne({ name: slug });
         const category = await categoryModel.find({
-            $or: [{ name: {$regex:slug, $options:'i'}}]
+            $or: [{ name: { $regex: slug, $options: 'i' } }]
         })
         const products = await productModel.find({ category }).populate('category');
         res.status(201).send({

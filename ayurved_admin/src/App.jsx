@@ -11,6 +11,7 @@ import EditNews from './pages/Dashboard/Category';
 import UpdateProduct from './pages/Form/UpdateProduct';
 import UpdateCategory from './pages/Form/UpdateCategory';
 import Orders from './pages/Dashboard/Orders';
+import Banner from './pages/Dashboard/Banner';
 
 const DefaultLayout = lazy(() => import('./layout/DefaultLayout'));
 
@@ -38,7 +39,8 @@ function App() {
           <Route path="/category" element={<EditNews />} />
           <Route path="/update-product/:id" element={<UpdateProduct />} />
           <Route path="/update-category/:id" element={<UpdateCategory />} />
-          <Route path='/orders' element={<Orders/>} />
+          <Route path="/orders" element={<Orders />} />
+          <Route path="/banner" element={<Banner />} />
           {routes.map((routes, index) => {
             const { path, component: Component } = routes;
             return (

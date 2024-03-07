@@ -3,7 +3,9 @@ import { lazy } from 'react';
 const Calendar = lazy(() => import('../pages/Calendar'));
 const Chart = lazy(() => import('../pages/Chart'));
 const CreateCategory = lazy(() => import('../pages/Form/CreateCategory'));
-const CreateProduct = lazy(() => import('../pages/Form/CreateProduct'));
+
+const CreateProduct = lazy(() => import('../pages/Form/CreateProduct'))
+const UploadBanner = lazy(() => import('../pages/Form/UploadBanner'));
 const Profile = lazy(() => import('../pages/Profile'));
 const Settings = lazy(() => import('../pages/Settings'));
 const Tables = lazy(() => import('../pages/Tables'));
@@ -32,9 +34,9 @@ const coreRoutes = [
     component: CreateProduct,
   },
   {
-    path: '/orders',
-    title: 'Handle Orders',
-    component: CreateProduct,
+    path: '/upload-banner',
+    title: 'Upload Banner',
+    component: UploadBanner,
   },
   {
     path: '/tables',

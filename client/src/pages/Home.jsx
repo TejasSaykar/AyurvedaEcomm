@@ -6,10 +6,27 @@ import { Carousel } from "react-responsive-carousel";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const Home = () => {
   const [products, setProducts] = useState([]);
+  const [banners, setBanners] = useState([]);
   const navigate = useNavigate();
+
+  let settings = {
+    dots: true,
+    infinite: true,
+    speed: 1000,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    vertical: false,
+    autoplay: true,
+    duration: 1000,
+    cssEase: "ease-in-out",
+    fade: true,
+  };
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -23,21 +40,37 @@ const Home = () => {
     fetchProduct();
   }, []);
 
+  useEffect(() => {
+    const fetchBanners = async () => {
+      try {
+        const { data } = await axios.get(
+          `${import.meta.env.VITE_BASE_URL}/banner/get-banners`
+        );
+        if (data) {
+          setBanners(data.banners);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchBanners();
+  }, []);
+
   return (
     <Layout>
       <div className="w-full px-4 md:px-10 mt-10">
-        <div className="top w-full">
-          {/* <Carousel axis="horizontal" autoPlay="true" autoFocus="true"> */}
-          <div>
-            <img src="/img/homeBg.webp" className="w-full rounded-xl" alt="" />
-          </div>
-          {/* <div>
-              <img src="/img/homeBg.webp" className="rounded-xl" alt="" />
-            </div>
-            <div>
-              <img src="/img/homeBg.webp" className="rounded-xl" alt="" />
-            </div> */}
-          {/* </Carousel> */}
+        <div className="top h-full w-full" style={{ height: "500px" }}>
+          <Slider {...settings}>
+            {banners.map((b) => (
+              <div className="slick-slide w-full h-full flex">
+                <img
+                  src={`http://localhost:8080/images/${b.bannerImage}`}
+                  className="w-full h-[500px] object-cover aspect-video -z-10"
+                  alt=""
+                />
+              </div>
+            ))}
+          </Slider>
         </div>
         <div className="products mt-10">
           <div>
@@ -47,8 +80,13 @@ const Home = () => {
                 <Link
                   to={`/details/${product._id}`}
                   key={product._id}
-                  className="bg-gray-200/30 cursor-pointer rounded-xl p-4 flex flex-col gap-1"
+                  className="bg-gray-200/30 relative cursor-pointer rounded-xl p-4 flex flex-col gap-1"
                 >
+                  {product.quantity < 1 && (
+                    <span className="absolute text-sm font-semibold bg-yellow-400 p-1 pr-2 rounded-r-full">
+                      Out Of Stock
+                    </span>
+                  )}
                   <img
                     src={`http://localhost:8080/images/${product.image}`}
                     className="xl:bg-transparent aspect-square bg-cover object-cover"

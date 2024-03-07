@@ -5,6 +5,7 @@ const authRoute = require("./routes/authRoute");
 const productRoute = require("./routes/productRoute");
 const uploadController = require("./controllers/uploadController");
 const categoryRoute = require("./routes/categoryRoute");
+const bannerRoute = require("./routes/bannerRoute");
 const path = require("path");
 const dotenv = require("dotenv")
 const app = express();
@@ -24,6 +25,7 @@ app.use("/api/auth", authRoute);
 app.use("/api/product", productRoute);
 app.use("/api/category", categoryRoute);
 app.use("/upload", uploadController);
+app.use("/banner", bannerRoute);
 
 
 const port = process.env.PORT | 8080;

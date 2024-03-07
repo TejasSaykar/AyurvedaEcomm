@@ -37,12 +37,6 @@ const Navbar = () => {
   const { user, token } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
-  let userId;
-  if (!user) {
-    userId = import.meta.env.VITE_DUMMY_ID;
-  } else {
-    userId = user._id;
-  }
   let total = 0;
   products?.map((item) => (total += item.quantity * item.price));
 
@@ -77,25 +71,6 @@ const Navbar = () => {
 
   const popupRef = useRef(null);
   const popupRef1 = useRef(null);
-
-  const handleOrder = async () => {
-    try {
-      const { data } = await axios.post(
-        `${import.meta.env.VITE_BASE_URL}/api/auth/order`,
-        {
-          products,
-          userId,
-        }
-      );
-      if (data) {
-        console.log("Order Data : ", data);
-        localStorage.removeItem("persist:root");
-        dispatch(emptyCart());
-      }
-    } catch (error) {
-      console.log(error.response.data.message);
-    }
-  };
 
   useEffect(() => {
     const handleOutsideClick = (event) => {
@@ -395,7 +370,7 @@ const Navbar = () => {
                           <h4 className="text-lg font-semibold">₹{total}</h4>
                         </div>
                         <button
-                          onClick={handleOrder}
+                          onClick={() => navigate("/place-order")}
                           className="bg-orange-500 w-full mt-5 py-3 rounded-full text-white font-semibold text-lg"
                         >
                           Checkout
@@ -443,7 +418,7 @@ const Navbar = () => {
                 onMouseLeave={() => {
                   setCatView(false);
                 }}
-                className="absolute hover:border-t-2 hover:border-t-black border-t-white w-full shadow-md flex flex-col gap-3 py-4 bg-white px-5"
+                className="absolute z-5 hover:border-t-2 hover:border-t-black border-t-white w-full shadow-md flex flex-col gap-3 py-4 bg-white px-5"
               >
                 {categories.map((cat) => (
                   <div key={cat._id} className="w-full">

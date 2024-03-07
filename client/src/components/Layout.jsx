@@ -7,10 +7,10 @@ const Layout = ({ children }) => {
   const location = useLocation();
   return (
     <div>
-      <header className="fixed top-0 w-full bg-white">
+      <header className="fixed top-0 z-10 w-full bg-white">
         <Navbar />
       </header>
-      <main className={`${location.pathname === "/" ? "mt-52" : "mt-40"}`}>
+      <main className={`${location.pathname === "/" ? "mt-52" : "mt-32"}`}>
         {children}
       </main>
       <footer>

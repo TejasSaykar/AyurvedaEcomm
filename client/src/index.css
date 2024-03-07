@@ -40,13 +40,28 @@
 }
 
 
+@keyframes slideIn {
+  0% {
+    opacity: 0;
+    transform: translateY(50px);
+  }
 
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Apply the animation to each slide */
+.slick-slide {
+  animation: slideIn 0.5s ease;
+}
 
 
 .scroll-container1 {
-  width: 380px;
+  width: 100%;
   /* Set a width for the scrollable area */
-  height: 100px;
+  height: 150px;
   /* Set a height for the scrollable area */
   overflow: auto;
   /* Enable scrolling */

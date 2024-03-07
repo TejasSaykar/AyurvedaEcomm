@@ -13,6 +13,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Orders from "./pages/Orders";
 import { useSelector } from "react-redux";
+import PlaceOrder from "./pages/PlaceOrder";
 
 function App() {
   const location = useLocation();
@@ -50,6 +51,15 @@ function App() {
           element={
             <IsLogin>
               <Orders />
+            </IsLogin>
+          }
+        />
+
+        <Route
+          path="/place-order"
+          element={
+            <IsLogin>
+              <PlaceOrder />
             </IsLogin>
           }
         />

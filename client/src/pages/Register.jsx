@@ -34,7 +34,7 @@ const Register = () => {
 
   return (
     <Layout>
-      <div className="w-full sm:h-[80vh] px-3 md:px-0 flex bg-[#FBFADA] flex-col items-center">
+      <div className="w-full sm:h-[80vh] pt-10 px-3 md:px-0 flex bg-[#FBFADA] flex-col items-center">
         <div className="w-full sm:w-1/3 lg:w-1/4 sm:mx-auto p-4 my-10 sm:my-0 md:mt-8 rounded-md bg-white">
           <h2 className="text-3xl font-semibold text-center pb-2">Register</h2>
           <div className="flex flex-col gap-4">

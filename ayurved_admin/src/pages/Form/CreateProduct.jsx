@@ -10,6 +10,7 @@ const FormLayout = () => {
   const [description, setDescription] = useState('');
   const [category, setCategory] = useState('');
   const [price, setPrice] = useState('');
+  const [quantity, setQuantity] = useState('');
   const [review, setReview] = useState('');
   const [file, setFile] = useState(null);
 
@@ -34,6 +35,7 @@ const FormLayout = () => {
       category,
       price,
       review,
+      quantity,
       file,
     };
     if (file) {
@@ -172,6 +174,22 @@ const FormLayout = () => {
                     />
                   </div>
                 </div>
+
+                <div className="mb-0 mt-4 flex flex-col gap-6 xl:flex-row">
+                  <div className="w-full">
+                    <label className="mb-2.5 block text-black dark:text-white">
+                      Quantity
+                    </label>
+                    <input
+                      type="number"
+                      placeholder="Enter Qunatity"
+                      value={quantity}
+                      onChange={(e) => setQuantity(e.target.value)}
+                      className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                    />
+                  </div>
+                </div>
+
                 <div className="w-full mt-4">
                   <label className="mb-2.5 block text-black dark:text-white">
                     Description
