@@ -216,7 +216,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                           !open && 'hidden'
                         }`}
                       >
-                        <ul className="mb-5.5 flex flex-col gap-2.5 pl-6">
+                        <ul className="flex flex-col gap-2.5 pl-6">
                           <li>
                             <NavLink
                               to="/orders"
@@ -237,7 +237,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                           !open && 'hidden'
                         }`}
                       >
-                        <ul className="mb-5.5 flex flex-col gap-2.5 pl-6">
+                        <ul className="mt-3 flex flex-col gap-2.5 pl-6">
                           <li>
                             <NavLink
                               to="/banner"
@@ -248,6 +248,48 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                               onClick={() => setSidebarOpen(!sidebarOpen)}
                             >
                               Banner Images
+                            </NavLink>
+                          </li>
+                        </ul>
+                      </div>
+
+                      <div
+                        className={`translate transform overflow-hidden ${
+                          !open && 'hidden'
+                        }`}
+                      >
+                        <ul className="mt-3 flex flex-col gap-2.5 pl-6">
+                          <li>
+                            <NavLink
+                              to="/combos"
+                              className={({ isActive }) =>
+                                'group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ' +
+                                (isActive && '!text-white')
+                              }
+                              onClick={() => setSidebarOpen(!sidebarOpen)}
+                            >
+                              Combos
+                            </NavLink>
+                          </li>
+                        </ul>
+                      </div>
+
+                      <div
+                        className={`translate transform overflow-hidden ${
+                          !open && 'hidden'
+                        }`}
+                      >
+                        <ul className="mt-3 mb-5.5 flex flex-col gap-2.5 pl-6">
+                          <li>
+                            <NavLink
+                              to="/popup"
+                              className={({ isActive }) =>
+                                'group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ' +
+                                (isActive && '!text-white')
+                              }
+                              onClick={() => setSidebarOpen(!sidebarOpen)}
+                            >
+                              Popup Data
                             </NavLink>
                           </li>
                         </ul>

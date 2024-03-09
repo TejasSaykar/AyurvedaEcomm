@@ -21,6 +21,7 @@ import {
 } from "../store/cartSlice";
 import axios from "axios";
 import { logout } from "../store/authSlice";
+import Popup from "../pages/Popup";
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -32,6 +33,7 @@ const Navbar = () => {
   const [categories, setCategories] = useState([]);
   const [active, setActive] = useState(false);
   const [auth, setAuth] = useState(false);
+  const [popup, setPopup] = useState("");
   const location = useLocation();
   const { products } = useSelector((state) => state.cart);
   const { user, token } = useSelector((state) => state.auth);
@@ -43,6 +45,15 @@ const Navbar = () => {
   const isActive = () => {
     window.scrollY > 2 ? setActive(true) : setActive(false);
   };
+
+  let popupShown;
+  useEffect(() => {
+    popupShown = localStorage.getItem("popupShown");
+    if (!popupShown) {
+      setPopup(true);
+      document.body.style.overflow = "hidden";
+    }
+  }, []);
 
   useEffect(() => {
     window.addEventListener("scroll", isActive);
@@ -111,7 +122,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="w-full  shadow-lg">
+    <div className={`w-full shadow-lg ${popup && "bg-[#12372A]/50"}`}>
       {!active && (
         <div className="topNav sticky w-full bg-green-900 flex justify-between py-1 px-10 text-white">
           <div>
@@ -132,10 +143,10 @@ const Navbar = () => {
           <div className="ring-1 grid grid-cols-2 px-5 ring-gray-200 rounded-full p-1.5 md:w-[20vw]">
             <input
               type="text"
-              className="focus:outline-none placeholder:text-black placeholder:text-sm"
+              className="focus:outline-none bg-transparent placeholder:text-black placeholder:text-sm"
               placeholder="Search..."
             />
-            <span className="text-2xl flex justify-end">
+            <span className="text-2xl flex justify-end bg-transparent">
               <FiSearch />
             </span>
           </div>
@@ -405,7 +416,7 @@ const Navbar = () => {
               onMouseLeave={() => {
                 setCatView(false);
               }}
-              className="hover:border-b-2 hover:border-b-black h-full border-2 border-white"
+              className="hover:border-b-2 hover:border-b-black h-full border-2 border-transparent"
               style={{ letterSpacing: "3px" }}
             >
               SHOP BY CATEGORY
@@ -434,31 +445,31 @@ const Navbar = () => {
             )}
           </div>
           <Link
-            className="hover:border-b-2 hover:border-b-black flex items-center h-full border-2 border-white"
+            className="hover:border-b-2 hover:border-b-black flex items-center h-full border-2 border-transparent"
             style={{ letterSpacing: "3px" }}
           >
             SHOP BY PRODUCT
           </Link>
           <Link
-            className="hover:border-b-2 hover:border-b-black h-full flex items-center  border-2 border-white"
+            className="hover:border-b-2 hover:border-b-black h-full flex items-center  border-2 border-transparent"
             style={{ letterSpacing: "3px" }}
           >
             COMBOS
           </Link>
           <Link
-            className="hover:border-b-2 hover:border-b-black h-full flex items-center  border-2 border-white"
+            className="hover:border-b-2 hover:border-b-black h-full flex items-center  border-2 border-transparent"
             style={{ letterSpacing: "3px" }}
           >
             OFFERS
           </Link>
           <Link
-            className="hover:border-b-2 hover:border-b-black h-full flex items-center  border-2 border-white"
+            className="hover:border-b-2 hover:border-b-black h-full flex items-center  border-2 border-transparent"
             style={{ letterSpacing: "3px" }}
           >
             BLOG
           </Link>
           <Link
-            className="hover:border-b-2 hover:border-b-black h-full flex items-center  border-2 border-white"
+            className="hover:border-b-2 hover:border-b-black h-full flex items-center  border-2 border-transparent"
             style={{ letterSpacing: "3px" }}
           >
             CONSULT BY VAIDYA
@@ -525,6 +536,7 @@ const Navbar = () => {
           </div>
         </div>
       )}
+      {popup && <Popup setPopup={setPopup} />}
     </div>
   );
 };

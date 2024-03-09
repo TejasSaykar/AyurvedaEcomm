@@ -39,7 +39,7 @@ const ShopByCat = () => {
         )}
       </div>
       <div className="w-full bg-[#FBFADA] pb-10 flex">
-        <div className="grid  grid-cols-1 md:gap-4  md:grid-cols-3 px-4 md:w-[80%] mx-auto mb-8 md:mb-0">
+        <div className="grid  grid-cols-1 md:gap-4 space-y-4 md:space-y-0 md:grid-cols-3 px-4 md:w-[80%] mx-auto mb-8 md:mb-0">
           {products?.map((item) => (
             <Link
               to={`/details/${item._id}`}

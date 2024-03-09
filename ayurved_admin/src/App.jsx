@@ -12,6 +12,9 @@ import UpdateProduct from './pages/Form/UpdateProduct';
 import UpdateCategory from './pages/Form/UpdateCategory';
 import Orders from './pages/Dashboard/Orders';
 import Banner from './pages/Dashboard/Banner';
+import Combos from './pages/Dashboard/Combos';
+import CreateCombos from './pages/Form/CreateCombos';
+import PopupData from './pages/Dashboard/PopupData';
 
 const DefaultLayout = lazy(() => import('./layout/DefaultLayout'));
 
@@ -41,6 +44,9 @@ function App() {
           <Route path="/update-category/:id" element={<UpdateCategory />} />
           <Route path="/orders" element={<Orders />} />
           <Route path="/banner" element={<Banner />} />
+          <Route path="/combos" element={<Combos />} />
+          <Route path="/popup" element={<PopupData />} />
+          {/* <Route path="/create-combo" element={<CreateCombos />} /> */}
           {routes.map((routes, index) => {
             const { path, component: Component } = routes;
             return (

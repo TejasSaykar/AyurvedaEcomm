@@ -4,7 +4,9 @@ const Calendar = lazy(() => import('../pages/Calendar'));
 const Chart = lazy(() => import('../pages/Chart'));
 const CreateCategory = lazy(() => import('../pages/Form/CreateCategory'));
 
-const CreateProduct = lazy(() => import('../pages/Form/CreateProduct'))
+const CreateProduct = lazy(() => import('../pages/Form/CreateProduct'));
+
+const CreateCombo = lazy(() => import('../pages/Form/CreateCombos'));
 const UploadBanner = lazy(() => import('../pages/Form/UploadBanner'));
 const Profile = lazy(() => import('../pages/Profile'));
 const Settings = lazy(() => import('../pages/Settings'));
@@ -39,9 +41,9 @@ const coreRoutes = [
     component: UploadBanner,
   },
   {
-    path: '/tables',
-    title: 'Tables',
-    component: Tables,
+    path: '/create-combo',
+    title: 'Create Combo',
+    component: CreateCombo,
   },
   {
     path: '/settings',

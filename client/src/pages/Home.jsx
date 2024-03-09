@@ -9,6 +9,7 @@ import { useSelector } from "react-redux";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import Popup from "./Popup";
 
 const Home = () => {
   const [products, setProducts] = useState([]);

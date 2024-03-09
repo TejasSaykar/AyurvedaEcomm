@@ -130,13 +130,13 @@ const Orders = () => {
                   <p className="text-sm font-semibold pl-1">{order.status}</p>
                   <select
                     value={order.status}
-                    className="text-base font-light cursor-pointer focus:outline-none"
+                    className="text-base dark:bg-graydark px-2 py-2 rounded-sm ring-1 ring-bodyz font-light cursor-pointer focus:outline-none"
                     onChange={(e) =>
                       handleStatusChange(order._id, e.target.value)
                     }
                   >
                     {status.map((s) => (
-                      <option key={order._id} value={s}>
+                      <option className="px-2 py-3" key={order._id} value={s}>
                         {s}
                       </option>
                     ))}

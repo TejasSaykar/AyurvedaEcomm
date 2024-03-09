@@ -14,6 +14,7 @@ import Register from "./pages/Register";
 import Orders from "./pages/Orders";
 import { useSelector } from "react-redux";
 import PlaceOrder from "./pages/PlaceOrder";
+import Popup from "./pages/Popup";
 
 function App() {
   const location = useLocation();
@@ -63,6 +64,9 @@ function App() {
             </IsLogin>
           }
         />
+
+        {/* Popup */}
+        <Route path="/popup" element={<Popup />} />
       </Routes>
     </>
   );
