@@ -50,18 +50,20 @@ const Popup = ({ setPopup }) => {
   const handleClose = () => {
     setPopup(false);
     document.body.style.overflow = "scroll";
-  }
+  };
 
   return (
     <>
       <div
         className={`z-999 w-full h-screen bg-[#12372A]/50 absolute pt-5 text-white z-50`}
       >
-        <div className={`md:w-1/3 mx-2 md:mx-auto rounded-sm relative bg-[#436850] ${
-          showPopup
-            ? "-translate-y-0 opacity-100 transition-transform ease-out duration-700"
-            : "-translate-y-full opacity-0 transition-transform ease-in duration-700"
-        }`}>
+        <div
+          className={`md:w-1/3 mx-2 md:mx-auto rounded-sm relative bg-[#436850] ${
+            showPopup
+              ? "-translate-y-0 opacity-100 transition-transform ease-out duration-700"
+              : "-translate-y-full opacity-0 transition-transform ease-in duration-700"
+          }`}
+        >
           <div className="p-3 right-0 absolute">
             <MdClose
               className="text-2xl cursor-pointer"

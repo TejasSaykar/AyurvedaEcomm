@@ -7,7 +7,7 @@ import { IoIosStarHalf } from "react-icons/io";
 import axios from "axios";
 import { useState } from "react";
 
-const ShopByCat = () => {
+const ShopByProd = () => {
   const { slug } = useParams();
 
   const [products, setProducts] = useState([]);
@@ -15,7 +15,7 @@ const ShopByCat = () => {
   useEffect(() => {
     const fetchProduct = async () => {
       const { data } = await axios.get(
-        `${import.meta.env.VITE_BASE_URL}/api/product/product-category/${slug}`
+        `${import.meta.env.VITE_BASE_URL}/api/product/find-by-product/${slug}`
       );
       if (data) {
         // console.log("Product Category : ", data);
@@ -30,11 +30,12 @@ const ShopByCat = () => {
       <div className="bg-white pb-5 pt-10">
         {products.length === 0 ? (
           <h2 className="text-center text-xl font-semibold">
-            No products with this category
+            No products available
           </h2>
         ) : (
           <h2 className="text-center text-xl font-semibold">
-            {products.length} {products.length < 2 ? "product" : "Products"} found with this Category
+            {products.length} {products.length < 2 ? "product" : "products"}{" "}
+            found
           </h2>
         )}
       </div>
@@ -78,4 +79,4 @@ const ShopByCat = () => {
   );
 };
 
-export default ShopByCat;
+export default ShopByProd;

@@ -1,4 +1,5 @@
 const categoryModel = require("../models/categoryModel");
+const comboModel = require("../models/comboModel");
 const productModel = require("../models/productModel");
 
 
@@ -27,6 +28,25 @@ exports.createProduct = async (req, res) => {
 exports.getProducts = async (req, res) => {
     try {
         const product = await productModel.find({}).populate('category');
+        return res.status(200).json({
+            success: true,
+            message: "Product is getting",
+            product
+        })
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            success: false,
+            message: "Error while getting the products",
+            error
+        })
+    }
+}
+
+// Get products for users
+exports.getUserProducts = async (req, res) => {
+    try {
+        const product = await productModel.find({ isCombo: false }).populate('category');
         return res.status(200).json({
             success: true,
             message: "Product is getting",
@@ -129,5 +149,149 @@ exports.productCategoryController = async (req, res) => {
             error
         })
 
+    }
+}
+
+
+exports.findByProduct = async (req, res) => {
+    const slug = req.params.slug;
+    try {
+        const products = await productModel.find({
+            $or: [
+                { title: { $regex: slug, $options: "i" } },
+                { desc: { $regex: slug, $options: "i" } }
+            ]
+        });
+        return res.status(200).json({
+            success: true,
+            message: "Products found",
+            products
+        })
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({
+            success: false,
+            message: "Error while getting product",
+            error
+        })
+    }
+}
+
+
+// Create Combo Products
+exports.createCombo = async (req, res) => {
+    const { title, desc, price, image, products } = req.body;
+    try {
+        const product = await new comboModel({ title, desc, price, products, image }).save();
+        return res.status(200).json({
+            success: true,
+            message: "Combo products are created",
+            product
+        })
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({
+            success: false,
+            message: "Error while creating the combo product",
+            error
+        })
+    }
+}
+
+
+// Get Combo Products
+exports.getCombo = async (req, res) => {
+    try {
+        const products = await productModel.find({ isCombo: true });
+        return res.status(200).json({
+            success: true,
+            message: "Getting all Combos",
+            products
+        })
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({
+            success: false,
+            message: "Error while getting the combos",
+            error
+        })
+    }
+}
+
+
+// Get single combo
+exports.getSingleCombo = async (req, res) => {
+    const id = req.params.id;
+    try {
+        const combo = await comboModel.findById({ _id: id });
+        return res.status(200).json({
+            success: true,
+            message: "Getting the single product",
+            combo
+        })
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({
+            success: false,
+            message: "Error while getting the single combo",
+            error
+        })
+    }
+}
+
+
+// Delete Combo
+exports.deleteCombo = async (req, res) => {
+    const id = req.params.id;
+    try {
+        const combo = await comboModel.findByIdAndDelete({ _id: id });
+        return res.status(200).json({
+            success: false,
+            message: "Product deleted",
+            combo
+        })
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({
+            success: false,
+            message: "Error while deleting the combo",
+            error
+        })
+    }
+}
+
+
+// Search Product
+exports.searchProduct = async (req, res) => {
+    const keyword = req.params.keyword;
+    try {
+        const products = await productModel.find({
+            $or: [
+                { title: { $regex: keyword, $options: "i" } },
+                { desc: { $regex: keyword, $options: "i" } }
+            ]
+        });
+
+        // const comboProducts = await comboModel.find({
+        //     $or: [
+        //         { title: { $regex: keyword, $options: "i" } },
+        //         { desc: { $regex: keyword, $options: "i" } }
+        //     ]
+        // });
+
+        // const filteredProd = [...products, ...comboProducts]
+
+        return res.status(200).json({
+            success: false,
+            message: "Products getting",
+            products
+        })
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({
+            success: false,
+            message: "Error while searching the product",
+            error
+        })
     }
 }

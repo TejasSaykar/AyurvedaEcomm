@@ -13,6 +13,7 @@ import { CgMenuRightAlt } from "react-icons/cg";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { RiArrowRightSLine } from "react-icons/ri";
 import { IoIosClose } from "react-icons/io";
+import { IoIosArrowDown } from "react-icons/io";
 import {
   addFromCart,
   addToCart,
@@ -22,13 +23,16 @@ import {
 import axios from "axios";
 import { logout } from "../store/authSlice";
 import Popup from "../pages/Popup";
+import { useSearch } from "../context/SearchContext";
 
 const Navbar = () => {
   const navigate = useNavigate();
   const [cart, setCart] = useState(false);
   const [quantity, setQuantity] = useState("");
   const [catView, setCatView] = useState(false);
+  const [prodView, setProdView] = useState(false);
   const [mobCat, setMobCat] = useState(false);
+  const [mobProd, setMobProd] = useState(false);
   const [mobileNav, setMobileNav] = useState(false);
   const [categories, setCategories] = useState([]);
   const [active, setActive] = useState(false);
@@ -37,7 +41,50 @@ const Navbar = () => {
   const location = useLocation();
   const { products } = useSelector((state) => state.cart);
   const { user, token } = useSelector((state) => state.auth);
+
+  const [search, setSearch] = useSearch();
+
   const dispatch = useDispatch();
+
+  // console.log("Pathname : ", location.pathname.split("/")[2]);
+
+  const prodMenu = [
+    {
+      name: "Juices",
+      path: "juices",
+    },
+    {
+      name: "Herbal Powders",
+      path: "herbalpowder",
+    },
+    {
+      name: "Tablets",
+      path: "tablets",
+    },
+    {
+      name: "Oils",
+      path: "oils",
+    },
+  ];
+
+  const searchRef = useRef();
+
+  const handleSearch = async (e) => {
+    e.preventDefault();
+    try {
+      const { data } = await axios.post(
+        `${import.meta.env.VITE_BASE_URL}/api/product/search/${search.keyword}`
+      );
+      if (data) {
+        // console.log("Search Data : ", data.products);
+        setSearch({ ...search, result: data.products });
+        searchRef.current.value = "";
+        navigate("/search");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   let total = 0;
   products?.map((item) => (total += item.quantity * item.price));
@@ -81,7 +128,6 @@ const Navbar = () => {
   }, []);
 
   const popupRef = useRef(null);
-  const popupRef1 = useRef(null);
 
   useEffect(() => {
     const handleOutsideClick = (event) => {
@@ -111,16 +157,6 @@ const Navbar = () => {
     };
   }, []);
 
-  const handleQty = (cm, item) => {
-    if (cm === "dec") {
-      if (quantity === 1) return;
-      setQuantity((prev) => prev - 1);
-    } else if (cm === "inc") {
-      setQuantity((prev) => prev + 1);
-    }
-    dispatch(addFromCart({ item, quantity }));
-  };
-
   return (
     <div className={`w-full shadow-lg ${popup && "bg-[#12372A]/50"}`}>
       {!active && (
@@ -131,24 +167,34 @@ const Navbar = () => {
             </h3>
           </div>
           <div className="hidden md:flex gap-2 text-lg p-[3px]">
-            <FaInstagram />
-            <FaFacebook />
-            <IoLogoYoutube />
-            <FaXTwitter />
+            <FaInstagram className="cursor-pointer" />
+            <FaFacebook className="cursor-pointer" />
+            <IoLogoYoutube className="cursor-pointer" />
+            <FaXTwitter className="cursor-pointer" />
           </div>
         </div>
       )}
       <div className="middle w-full grid grid-cols-2 text-center md:grid md:grid-cols-3 h-28 md:h-20 items-center p-2 md:px-10">
         <div className="left w-full hidden md:block">
-          <div className="ring-1 grid grid-cols-2 px-5 ring-gray-200 rounded-full p-1.5 md:w-[20vw]">
+          <div className="ring-1 grid grid-cols-12 px-5 items-center ring-gray-200 rounded-full p-1.5 md:w-[26vw] xl:w-[20vw]">
             <input
               type="text"
-              className="focus:outline-none bg-transparent placeholder:text-black placeholder:text-sm"
+              ref={searchRef}
+              value={search.keyword}
+              onChange={(e) =>
+                setSearch({ ...search, keyword: e.target.value })
+              }
+              className="focus:outline-none col-span-10 w-full bg-transparent placeholder:text-black placeholder:text-sm"
               placeholder="Search..."
             />
-            <span className="text-2xl flex justify-end bg-transparent">
+            <button
+              type="submit"
+              onClick={handleSearch}
+              className="text-xl bg-[#436850] text-white px-1 rounded-sm col-span-2 py-1 flex cursor-pointer w-[max-content]"
+              disabled={!search.keyword}
+            >
               <FiSearch />
-            </span>
+            </button>
           </div>
         </div>
 
@@ -160,14 +206,22 @@ const Navbar = () => {
         <div className="relative right w-full flex justify-end">
           <div>
             {!cart && (
-              <div className="flex gap-5 items-center">
+              <div className="flex gap-2 md:gap-5 items-center">
                 <div className="relative">
                   <h3
                     onClick={() => setAuth(!auth)}
                     className="text-3xl md:text-2xl cursor-pointer"
                   >
                     {token && user ? (
-                      <h2 className="text-lg">{user.username}</h2>
+                      <h2
+                        className="text-base flex items-center md:text-lg"
+                        onClick={() => setAuth(false)}
+                      >
+                        {user.username}
+                        <span>
+                          <IoIosArrowDown />
+                        </span>
+                      </h2>
                     ) : (
                       <IoPersonOutline />
                     )}
@@ -197,6 +251,13 @@ const Navbar = () => {
                       )}
                       {token && (
                         <>
+                          <Link
+                            to={"/orders"}
+                            onClick={() => setAuth(!auth)}
+                            className="hover:text-black"
+                          >
+                            Orders
+                          </Link>
                           <button
                             onClick={() => {
                               setAuth(!auth),
@@ -207,13 +268,6 @@ const Navbar = () => {
                           >
                             Logout
                           </button>
-                          <Link
-                            to={"/orders"}
-                            onClick={() => setAuth(!auth)}
-                            className="hover:text-black"
-                          >
-                            Orders
-                          </Link>
                         </>
                       )}
                     </div>
@@ -327,13 +381,13 @@ const Navbar = () => {
                                 </h4>
                               </div>
                               <div className="flex justify-between">
-                                <Link
+                                {/* <Link
                                   className="px-3 py-1 w-[max-content] bg-green-400 text-sm rounded-md font-semibold"
                                   to={`/details/${item._id}`}
                                   onClick={() => setCart(false)}
                                 >
                                   View Product
-                                </Link>
+                                </Link> */}
                                 <button
                                   className="top-0 flex flex-end text-red-500 text-xl px-3 py-1 rounded-md md:-right-20"
                                   onClick={() => handleDelete(item._id)}
@@ -341,29 +395,6 @@ const Navbar = () => {
                                   <RiDeleteBin6Line />
                                 </button>
                               </div>
-                              {/* <div className="ring-1 w-[max-content] items-center ring-gray-300 rounded-lg px-2 py-1 mt-2 flex gap-3">
-                          <span
-                            className="px-1 cursor-pointer"
-                            onClick={() => {
-                              handleQty("dec"), item;
-                            }}
-                          >
-                            -
-                          </span>
-                          <input
-                            className="px-1 w-6"
-                            value={item.quantity}
-                            // onChange={(e) => setQuantity(e.target.value)}
-                          />
-                          <span
-                            className="px-1 cursor-pointer"
-                            onClick={() => {
-                              handleQty("inc"), item;
-                            }}
-                          >
-                            +
-                          </span>
-                        </div> */}
                             </div>
                           </div>
                         ))}
@@ -395,15 +426,21 @@ const Navbar = () => {
           </div>
         </div>
 
-        <div className="w-[78vw] sm:w-[85vw] md:hidden ml-5 sm:ml-7 mx-auto grid grid-cols-2 ring-1 ring-gray-200 rounded-full px-2 py-2 mb-3 mt-4">
+        <div className="w-[78vw] sm:w-[85vw] md:hidden ml-5 sm:ml-7 mx-auto grid grid-cols-12 ring-1 ring-gray-200 rounded-full px-2 py-2 mb-3 mt-4">
           <input
             type="text"
-            className="focus:outline-none placeholder:text-black placeholder:text-sm"
+            // ref={searchRef}
+            onChange={(e) => setSearch({ ...search, keyword: e.target.value })}
+            className="focus:outline-none col-span-10 pl-3 sm:pl-10 placeholder:text-black placeholder:text-sm"
             placeholder="Search..."
           />
-          <span className="text-2xl flex justify-end">
+          <button
+            type="submit"
+            onClick={handleSearch}
+            className="text-sm bg-[#436850] text-white px-1 rounded-sm col-span-2 py-1 flex cursor-pointer  w-[max-content]"
+          >
             <FiSearch />
-          </span>
+          </button>
         </div>
       </div>
       <div className="bottom relative hidden w-full border-t-[1px] h-12 md:flex items-center">
@@ -416,7 +453,10 @@ const Navbar = () => {
               onMouseLeave={() => {
                 setCatView(false);
               }}
-              className="hover:border-b-2 hover:border-b-black h-full border-2 border-transparent"
+              className={`${
+                location.pathname.split("/")[1] === "shop-by-cat" &&
+                "text-sm font-bold"
+              } hover:border-b-2 hover:border-b-black h-full border-2 border-transparent`}
               style={{ letterSpacing: "3px" }}
             >
               SHOP BY CATEGORY
@@ -435,7 +475,10 @@ const Navbar = () => {
                   <div key={cat._id} className="w-full">
                     <Link
                       to={`/shop-by-cat/${cat.name}`}
-                      className="text-base hover:font-semibold w-full"
+                      className={`text-base hover:font-semibold w-full ${
+                        location.pathname.split("/")[2] === cat.name &&
+                        "font-bold text-base"
+                      }`}
                     >
                       {cat.name}
                     </Link>
@@ -444,20 +487,59 @@ const Navbar = () => {
               </div>
             )}
           </div>
+          <div className="relative h-full">
+            <button
+              onMouseEnter={() => {
+                setProdView(true);
+              }}
+              onMouseLeave={() => {
+                setProdView(false);
+              }}
+              className={`${
+                location.pathname.split("/")[1] === "shop-by-prod" &&
+                "text-sm font-bold"
+              } hover:border-b-2 hover:border-b-black h-full border-2 border-transparent`}
+              style={{ letterSpacing: "3px" }}
+            >
+              SHOP BY PRODUCTS
+            </button>
+            {prodView === true && (
+              <div
+                onMouseEnter={() => {
+                  setProdView(true);
+                }}
+                onMouseLeave={() => {
+                  setProdView(false);
+                }}
+                className="absolute z-5 hover:border-t-2 hover:border-t-black border-t-white w-full shadow-md flex flex-col gap-3 py-4 bg-white px-5"
+              >
+                {prodMenu.map((prod) => (
+                  <div key={prod.name} className="w-full">
+                    <Link
+                      to={`/shop-by-prod/${prod.path}`}
+                      className={`text-base hover:font-semibold w-full ${
+                        location.pathname.split("/")[2] === prod.path &&
+                        "font-bold text-base"
+                      }`}
+                    >
+                      {prod.name}
+                    </Link>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
           <Link
-            className="hover:border-b-2 hover:border-b-black flex items-center h-full border-2 border-transparent"
-            style={{ letterSpacing: "3px" }}
-          >
-            SHOP BY PRODUCT
-          </Link>
-          <Link
-            className="hover:border-b-2 hover:border-b-black h-full flex items-center  border-2 border-transparent"
+            className={`${
+              location.pathname === "/combos" && "text-sm font-bold"
+            } hover:border-b-2 hover:border-b-black h-full flex items-center  border-2 border-transparent`}
+            to={"/combos"}
             style={{ letterSpacing: "3px" }}
           >
             COMBOS
           </Link>
           <Link
-            className="hover:border-b-2 hover:border-b-black h-full flex items-center  border-2 border-transparent"
+            className={`hover:border-b-2 hover:border-b-black h-full flex items-center border-2 border-transparent`}
             style={{ letterSpacing: "3px" }}
           >
             OFFERS
@@ -480,11 +562,11 @@ const Navbar = () => {
       {mobileNav && (
         <div className="absolute w-full bg-white shadow-md pb-14 px-3 flex flex-col gap-3">
           <div className="flex flex-col gap-7 p-3 rounded-md bg-gray-300/30">
-            <div className="flex relative justify-between">
+            <div className="flex relative z-10 justify-between">
               <Link onClick={() => setMobCat(true)} className="">
                 Shop by Categoy
               </Link>
-              <span className="cursor-pointer text-xl">
+              <span className="cursor-pointer -z-5 text-xl">
                 <RiArrowRightSLine onClick={() => setMobCat(true)} />
               </span>
 
@@ -495,12 +577,12 @@ const Navbar = () => {
                 >
                   <h2
                     onClick={() => setMobCat(false)}
-                    className="absolute right-1 top-1 text-3xl cursor-pointer"
+                    className="absolute z-5 right-1 top-1 text-3xl cursor-pointer"
                   >
                     <IoIosClose />
                   </h2>
                   {categories.map((c) => (
-                    <div className="flex flex-col gap-3" key={c._id}>
+                    <div className="flex z-10 flex-col gap-3" key={c._id}>
                       <Link
                         className="mt-2 hover:text-gray-400 font-medium"
                         to={`/shop-by-cat/${c.name}`}
@@ -515,14 +597,45 @@ const Navbar = () => {
                 </div>
               )}
             </div>
-            <div className="flex justify-between">
-              <Link className="">Shop by Product</Link>
-              <span className="cursor-pointer text-xl">
-                <RiArrowRightSLine />
+            <div className="flex relative justify-between">
+              <Link onClick={() => setMobProd(true)} className="">
+                Shop by Categoy
+              </Link>
+              <span className="cursor-pointer z-5 text-xl">
+                <RiArrowRightSLine onClick={() => setMobProd(true)} />
               </span>
+
+              {mobProd && (
+                <div
+                  ref={popupRef}
+                  className="absolute rounded-md -z-5 right-0 bg-white p-3"
+                >
+                  <h2
+                    onClick={() => setMobProd(false)}
+                    className="absolute right-1 top-1 text-3xl cursor-pointer"
+                  >
+                    <IoIosClose />
+                  </h2>
+                  {prodMenu.map((prod) => (
+                    <div className="flex flex-col z-10 gap-3" key={prod.name}>
+                      <Link
+                        className="mt-2 hover:text-gray-400 font-medium"
+                        to={`/shop-by-prod/${prod.path}`}
+                        onClick={() => {
+                          setMobileNav(false), setMobProd(false);
+                        }}
+                      >
+                        {prod.name}
+                      </Link>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
             <div className="flex justify-between">
-              <Link className="">Combos</Link>
+              <Link to={"/combos"} className="">
+                Combos
+              </Link>
               <span className="cursor-pointer text-xl">
                 <RiArrowRightSLine />
               </span>

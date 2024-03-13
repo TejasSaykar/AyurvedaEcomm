@@ -8,10 +8,11 @@ const UpdateBlog = () => {
   const apiUrl = import.meta.env.VITE_BASE_URL;
   const [input, setInput] = useState({
     title: '',
-    description: '',
+    desc: '',
     category: '',
     price: '',
     review: '',
+    isCombo: false,
     quantity: '',
     file: '',
   });
@@ -37,12 +38,14 @@ const UpdateBlog = () => {
       const res = await axios.put(
         `${apiUrl}/api/product/update-product/${id}`,
         {
-          title: input.title,
-          desc: input.description,
-          category: input.category,
-          price: input.price,
-          quantity: input.quantity,
-          file: input.file,
+          ...input,
+          // title: input.title,
+          // desc: input.description,
+          // category: input.category,
+          // price: input.price,
+          // quantity: input.quantity,
+          // isCombo: input.isCombo,
+          // file: input.file,
         },
       );
       if (res.data) {
@@ -112,19 +115,32 @@ const UpdateBlog = () => {
                   </div>
                 </div>
 
-                <div className="mb-4.5 w-full">
-                  <div className="mb-4.5 w-full">
+                <div className="mb-0 mt-4 flex justify-center items-center flex-col gap-6 xl:flex-row">
+                  <div className="w-full">
                     <label className="mb-2.5 block text-black dark:text-white">
                       Quantity
                     </label>
                     <input
                       type="number"
-                      placeholder="Quantity"
+                      placeholder="Enter Qunatity"
                       value={input.quantity}
                       onChange={(e) =>
                         setInput({ ...input, quantity: e.target.value })
                       }
                       className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                    />
+                  </div>
+                  <div className="w-full flex flex-col items-center">
+                    <label className="mb-2.5 block text-black dark:text-white">
+                      Is Combo
+                    </label>
+                    <input
+                      type="checkbox"
+                      checked={input.isCombo}
+                      onChange={(e) =>
+                        setInput({ ...input, isCombo: !input.isCombo })
+                      }
+                      className="h-5 w-5 cursor-pointer"
                     />
                   </div>
                 </div>
@@ -155,6 +171,9 @@ const UpdateBlog = () => {
                       type="text"
                       placeholder="Enter meta by separating comma"
                       value={input.review}
+                      onChange={(e) =>
+                        setInput({ ...input, review: e.target.value })
+                      }
                       className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                     />
                   </div>
@@ -169,7 +188,7 @@ const UpdateBlog = () => {
                       placeholder="Enter description"
                       value={input.desc}
                       onChange={(e) =>
-                        setInput({ ...input, description: e.target.value })
+                        setInput({ ...input, desc: e.target.value })
                       }
                       className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                     />

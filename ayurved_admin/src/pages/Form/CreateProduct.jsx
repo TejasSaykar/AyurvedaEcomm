@@ -12,6 +12,7 @@ const FormLayout = () => {
   const [price, setPrice] = useState('');
   const [quantity, setQuantity] = useState('');
   const [review, setReview] = useState('');
+  const [isCombo, setIsCombo] = useState(false);
   const [file, setFile] = useState(null);
 
   const [categories, setCategories] = useState([]);
@@ -36,6 +37,7 @@ const FormLayout = () => {
       price,
       review,
       quantity,
+      isCombo,
       file,
     };
     if (file) {
@@ -56,6 +58,7 @@ const FormLayout = () => {
           ...product,
           category: product.category,
           desc: product.description,
+          isCombo: product.isCombo,
           image: product.file,
         });
         if (res.data) {
@@ -175,7 +178,7 @@ const FormLayout = () => {
                   </div>
                 </div>
 
-                <div className="mb-0 mt-4 flex flex-col gap-6 xl:flex-row">
+                <div className="mb-0 mt-4 flex justify-center items-center flex-col gap-6 xl:flex-row">
                   <div className="w-full">
                     <label className="mb-2.5 block text-black dark:text-white">
                       Quantity
@@ -186,6 +189,17 @@ const FormLayout = () => {
                       value={quantity}
                       onChange={(e) => setQuantity(e.target.value)}
                       className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                    />
+                  </div>
+                  <div className="w-full flex flex-col items-center">
+                    <label className="mb-2.5 block text-black dark:text-white">
+                      Is Combo
+                    </label>
+                    <input
+                      type="checkbox"
+                      checked={isCombo}
+                      onChange={(e) => setIsCombo(!isCombo)}
+                      className="h-5 w-5 cursor-pointer"
                     />
                   </div>
                 </div>

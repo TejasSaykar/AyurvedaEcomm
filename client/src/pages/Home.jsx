@@ -32,7 +32,7 @@ const Home = () => {
   useEffect(() => {
     const fetchProduct = async () => {
       const { data } = await axios.get(
-        `${import.meta.env.VITE_BASE_URL}/api/product/all-products`
+        `${import.meta.env.VITE_BASE_URL}/api/product/get-user-product`
       );
       if (data) {
         setProducts(data.product);
@@ -77,7 +77,7 @@ const Home = () => {
           <div>
             <h2 className="text-2xl font-semibold my-8">Popular Products</h2>
             <Link className="w-full grid md:grid-cols-4 sm:grid-cols-3 grid-cols-1 xl:grid-cols-5 gap-4">
-              {products?.map((product) => (
+              {products?.slice(0, 10).map((product) => (
                 <Link
                   to={`/details/${product._id}`}
                   key={product._id}

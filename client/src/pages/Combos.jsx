@@ -1,46 +1,48 @@
 import React from "react";
 import Layout from "../components/Layout";
-import { useParams, Link } from "react-router-dom";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import axios from "axios";
 import { IoIosStar } from "react-icons/io";
 import { IoIosStarHalf } from "react-icons/io";
-import axios from "axios";
-import { useState } from "react";
 
-const ShopByCat = () => {
-  const { slug } = useParams();
-
-  const [products, setProducts] = useState([]);
+const Combos = () => {
+  const [combos, setCombos] = useState([]);
 
   useEffect(() => {
-    const fetchProduct = async () => {
-      const { data } = await axios.get(
-        `${import.meta.env.VITE_BASE_URL}/api/product/product-category/${slug}`
-      );
-      if (data) {
-        // console.log("Product Category : ", data);
-        setProducts(data.products);
+    const fetchCombos = async () => {
+      try {
+        const { data } = await axios.get(
+          `${import.meta.env.VITE_BASE_URL}/api/product/combos`
+        );
+        if (data) {
+          console.log("Combo Data :", data);
+          setCombos(data.products);
+        }
+      } catch (error) {
+        console.log(error);
       }
     };
-    fetchProduct();
-  }, [slug]);
+    fetchCombos();
+  }, []);
 
   return (
     <Layout>
       <div className="bg-white pb-5 pt-10">
-        {products.length === 0 ? (
+        {combos.length === 0 ? (
           <h2 className="text-center text-xl font-semibold">
-            No products with this category
+            No combos with this category
           </h2>
         ) : (
           <h2 className="text-center text-xl font-semibold">
-            {products.length} {products.length < 2 ? "product" : "Products"} found with this Category
+            {combos.length} Combo {combos.length < 2 ? "Product" : "Products"}{" "}
+            Available
           </h2>
         )}
       </div>
       <div className="w-full bg-white pb-10 flex">
-        <div className="grid  grid-cols-1 md:gap-4 space-y-4 md:space-y-0 md:grid-cols-3 px-4 md:w-[80%] mx-auto mb-8 md:mb-0">
-          {products?.map((item) => (
+        <div className="grid  grid-cols-1 md:gap-4 space-y-4 md:space-y-0 md:grid-cols-4 px-4 md:w-[80%] mx-auto mb-8 md:mb-0">
+          {combos?.map((item) => (
             <Link
               to={`/details/${item._id}`}
               className="w-full relative -z-9 cursor-pointer flex flex-col gap-2 p-4 bg-gray-300/20 rounded-md"
@@ -78,4 +80,4 @@ const ShopByCat = () => {
   );
 };
 
-export default ShopByCat;
+export default Combos;

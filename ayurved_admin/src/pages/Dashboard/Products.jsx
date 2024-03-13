@@ -48,11 +48,40 @@ const ECommerce = () => {
             Create Product
           </button>
         </div>
-        {products.length < 1 && (
+        {products.length < 1 ? (
           <h1 className="w-full text-center font-bold text-2xl pt-20">
-            No blogs to preview
+            No products to preview
           </h1>
+        ) : (
+          <h2>Total {products.length} Products Available</h2>
         )}
+        <div className="grid grid-cols-2 rounded-sm bg-gray-2 dark:bg-meta-4 sm:grid-cols-5">
+          <div className="hidden sm:block p-2.5 xl:p-5">
+            <h5 className="text-sm font-medium uppercase xsm:text-base">
+              Image
+            </h5>
+          </div>
+          <div className="p-2.5 text-center xl:p-5">
+            <h5 className="text-sm font-medium uppercase xsm:text-base">
+              Title
+            </h5>
+          </div>
+          <div className="p-2.5 text-center xl:p-5">
+            <h5 className="text-sm font-medium uppercase xsm:text-base">
+              Quantity
+            </h5>
+          </div>
+          <div className="p-2.5 hidden md:block text-center xl:p-5">
+            <h5 className="text-sm font-medium uppercase xsm:text-base">
+              Is Combo
+            </h5>
+          </div>
+          <div className="hidden p-2.5 text-center sm:block xl:p-5">
+            <h5 className="text-sm font-medium uppercase xsm:text-base">
+              Action
+            </h5>
+          </div>
+        </div>
         {products.length > 0 &&
           products.map((items, index) => (
             <CardOne1

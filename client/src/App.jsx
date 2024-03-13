@@ -15,6 +15,10 @@ import Orders from "./pages/Orders";
 import { useSelector } from "react-redux";
 import PlaceOrder from "./pages/PlaceOrder";
 import Popup from "./pages/Popup";
+import ShopByProd from "./pages/ShopByProd";
+import Combos from "./pages/Combos";
+import ComboDetails from "./pages/ComboDetails";
+import SearchResult from "./pages/SearchResult";
 
 function App() {
   const location = useLocation();
@@ -27,7 +31,9 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/details/:id" element={<ProductDetail />} />
+        <Route path="/combo-details/:id" element={<ComboDetails />} />
         <Route path="/create" element={<Create />} />
+        <Route path="/search" element={<SearchResult />} />
         <Route
           path="/cart"
           element={
@@ -37,6 +43,10 @@ function App() {
           }
         />
         <Route path="/shop-by-cat/:slug" element={<ShopByCat />} />
+        <Route path="/shop-by-prod/:slug" element={<ShopByProd />} />
+
+        {/* Combos */}
+        <Route path="/combos" element={<Combos />} />
 
         <Route path="/about-us" element={<AboutUs />} />
         <Route path="/contact-us" element={<ContactUs />} />

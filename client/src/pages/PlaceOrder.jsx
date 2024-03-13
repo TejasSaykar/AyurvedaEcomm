@@ -127,10 +127,13 @@ const PlaceOrder = () => {
                   </div>
                 )}
                 {products?.length > 0 && (
-                  <div className=" p-3 mt-2">
+                  <div className="w-full p-3 mt-2">
                     <div className="scroll-container1 overflow-y-scroll ">
                       {products?.map((item) => (
-                        <div key={item._id} className="flex gap-2">
+                        <div
+                          key={item._id}
+                          className="flex md:flex-row flex-col w-full gap-2"
+                        >
                           <div className="p-2">
                             <img
                               src={`http://localhost:8080/images/${item.image}`}
@@ -155,13 +158,13 @@ const PlaceOrder = () => {
                               </h4>
                             </div>
                             <div className="flex justify-between">
-                              <Link
+                              {/* <Link
                                 className="px-3 py-1 w-[max-content] bg-green-400 text-sm rounded-md font-semibold"
                                 to={`/details/${item._id}`}
                                 onClick={() => setCart(false)}
                               >
                                 View Product
-                              </Link>
+                              </Link> */}
                               <button
                                 className="top-0 flex flex-end text-red-500 text-xl px-3 py-1 rounded-md md:-right-20"
                                 onClick={() => handleDelete(item._id)}

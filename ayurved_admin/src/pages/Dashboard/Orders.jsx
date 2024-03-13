@@ -147,9 +147,9 @@ const Orders = () => {
                 </div>
               </div>
 
-              <div className="sm:flex items-center justify-center p-2.5 xl:p-5">
+              <div className="sm:flex items-center overflow-x-scroll gap-3 w-[230px] justify-center p-2.5 xl:p-5">
                 {order?.products?.map((p) => (
-                  <p className="text-meta-3">{p?.title}</p>
+                  <p className="text-meta-3 text-sm">{p?.title}</p>
                 ))}
               </div>
 
