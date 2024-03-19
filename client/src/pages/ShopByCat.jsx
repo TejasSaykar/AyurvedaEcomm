@@ -53,7 +53,7 @@ const ShopByCat = () => {
               )}
               <div className="">
                 <img
-                  src={`http://localhost:8080/images/${item.image}`}
+                  src={`http://31.220.58.235:8181/images/${item.image}`}
                   className="aspect-square object-cover"
                   alt=""
                 />
