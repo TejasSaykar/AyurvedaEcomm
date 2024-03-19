@@ -28,7 +28,7 @@ app.use("/upload", uploadController);
 app.use("/banner", bannerRoute);
 
 
-const port = process.env.PORT | 8081;
+const port = process.env.PORT | 8181;
 app.listen(port, () => {
     console.log(`SERVER IS RUNNING ON http://localhost:${port}`);
 })
