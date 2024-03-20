@@ -8,8 +8,8 @@ const categoryRoute = require("./routes/categoryRoute");
 const bannerRoute = require("./routes/bannerRoute");
 const path = require("path");
 const fs = require("fs");
-const https = require("https")
-const dotenv = require("dotenv")
+const https = require("https");
+const dotenv = require("dotenv");
 const app = express();
 
 // Configurations
@@ -29,44 +29,52 @@ app.use("/api/category", categoryRoute);
 app.use("/upload", uploadController);
 app.use("/banner", bannerRoute);
 
-app.get("/", (req,res) => {
-    res.send("Hello From Ayurved Ecomm");
-})
+app.get("/", (req, res) => {
+  res.send("Hello From Ayurved Ecomm");
+});
 
+// Load SSL certificates (replace these paths with your own certificates)
+// const privateKey = fs.readFileSync("./config/https/private.key", "utf8");
+// const certificate = fs.readFileSync("./config/https/certificate.crt", "utf8");
+// const ca = fs.readFileSync("./config/https/ca_bundle.crt", "utf8");
+
+// const credentials = {
+//   key: privateKey,
+//   cert: certificate,
+//   ca: ca,
+// };
+
+// // Create an HTTPS server
+// const httpsServer = https.createServer(credentials, app);
+
+// const port = 8181;
+// httpsServer.listen(port, () => {
+//   console.log(`SERVER IS RUNNING ON https://brahmand.online:${port}`);
+// });
 
 // const port = process.env.PORT | 8181;
 // app.listen(port, () => {
 //     console.log(`SERVER IS RUNNING ON http://localhost:${port}`);
 // })
 
-
 const PORT = 8181;
-
 const appInProduction = true;
-// db.getConnection((error) => {
-//     if (error) {
-//         console.log(error); 
-//     } else {
-//         console.log('Mongo database connected....🌼🌼')
-        if (!appInProduction) {
-            app.listen(PORT, () => {
-                console.log(`Server running on http://localhost:${PORT} ✅`);
-            });
-        } else {
-            
-            const httpsOptions = {
-                key: fs.readFileSync("./config/https/private.key"),
-                cert: fs.readFileSync("./config/https/certificate.crt"),
-                ca: [fs.readFileSync('./config/https/ca_bundle.crt')]
-            };
+if (!appInProduction) {
+  app.listen(PORT, () => {
+    console.log(`Server running on http://localhost:${PORT} ✅`);
+  });
+} else {
+  const httpsOptions = {
+    key: fs.readFileSync("./config/https/private.key"),
+    cert: fs.readFileSync("./config/https/certificate.crt"),
+    ca: [fs.readFileSync("./config/https/ca_bundle.crt")],
+  };
 
-             https.createServer(httpsOptions, app).listen(PORT, (error) => {
-                if (error) {
-                    console.error("Error starting HTTPS server:", error);
-                } else {
-                    console.log(`Server running on https://brahmand.online:${PORT} ✅`);
-                }
-            });
-        }
-//     } 
-// });
+  https.createServer(httpsOptions, app).listen(PORT, (error) => {
+    if (error) {
+      console.error("Error starting HTTPS server:", error);
+    } else {
+      console.log(`Server running on https://brahmand.online:${PORT} ✅`);
+    }
+  });
+}

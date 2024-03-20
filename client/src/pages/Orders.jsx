@@ -81,7 +81,7 @@ const Orders = () => {
                     {item?.products?.map((p) => (
                       <div className="flex-shrink-0">
                         <img
-                          src={`http://31.220.58.235:8181/images/${p?.image}`}
+                          src={`https://brahmand.online:8181/images/${p?.image}`}
                           className="h-12 w-12 rounded-full object-cover bg-cover"
                           alt="Brand"
                         />

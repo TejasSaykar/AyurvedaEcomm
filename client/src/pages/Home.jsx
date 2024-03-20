@@ -65,7 +65,7 @@ const Home = () => {
             {banners.map((b) => (
               <div className="slick-slide w-full h-full flex">
                 <img
-                  src={`http://31.220.58.235:8181/images/${b.bannerImage}`}
+                  src={`https://brahmand.online:8181/images/${b.bannerImage}`}
                   className="w-full h-[500px] object-cover aspect-video -z-10"
                   alt=""
                 />
@@ -89,7 +89,7 @@ const Home = () => {
                     </span>
                   )}
                   <img
-                    src={`http://31.220.58.235:8181/images/${product.image}`}
+                    src={`https://brahmand.online:8181/images/${product.image}`}
                     className="xl:bg-transparent aspect-square bg-cover object-cover"
                     alt=""
                   />

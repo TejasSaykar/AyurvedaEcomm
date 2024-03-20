@@ -136,7 +136,7 @@ const PlaceOrder = () => {
                         >
                           <div className="p-2">
                             <img
-                              src={`http://31.220.58.235:8181/images/${item.image}`}
+                              src={`https://brahmand.online:8181/images/${item.image}`}
                               className="h-32 w-32 object-cover bg-cover"
                               alt=""
                             />

@@ -34,7 +34,8 @@ const ShopByCat = () => {
           </h2>
         ) : (
           <h2 className="text-center text-xl font-semibold">
-            {products.length} {products.length < 2 ? "product" : "Products"} found with this Category
+            {products.length} {products.length < 2 ? "product" : "Products"}{" "}
+            found with this Category
           </h2>
         )}
       </div>
@@ -53,7 +54,7 @@ const ShopByCat = () => {
               )}
               <div className="">
                 <img
-                  src={`http://31.220.58.235:8181/images/${item.image}`}
+                  src={`https://brahmand.online:8181/images/${item.image}`}
                   className="aspect-square object-cover"
                   alt=""
                 />
