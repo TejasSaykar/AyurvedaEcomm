@@ -27,6 +27,10 @@ app.use("/api/category", categoryRoute);
 app.use("/upload", uploadController);
 app.use("/banner", bannerRoute);
 
+app.get("/", (req,res) => {
+    res.send("Hello From Ayurved Ecomm");
+})
+
 
 const port = process.env.PORT | 8181;
 app.listen(port, () => {
