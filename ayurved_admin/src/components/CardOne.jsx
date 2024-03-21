@@ -6,7 +6,7 @@ import { MdDelete } from 'react-icons/md';
 const CardOne = ({ item, type, fetchCategories }) => {
   const navigate = useNavigate();
   const apiUrl = import.meta.env.VITE_BASE_URL;
-  const PF = 'http://localhost:8080/images/';
+  const PF = 'https://brahmand.online:8181/images/';
   const handleUpdate = (id) => {
     navigate(`/update-category/${id}`);
   };

@@ -87,7 +87,7 @@ const PopupData = () => {
               <div className="flex-shrink-0 flex gap-1 py-2 scroll-container overflow-x-scroll w-[150px] md:w-[200px]">
                 {order?.products?.map((product) => (
                   <img
-                    src={`http://localhost:8080/images/${product?.image}`}
+                    src={`https://brahmand.online:8181/images/${product?.image}`}
                     className="h-10 w-10 rounded-full object-cover bg-cover"
                     alt="Brand"
                   />
@@ -98,7 +98,7 @@ const PopupData = () => {
             <div className="hidden sm:items-center md:flex sm:justify-center sm:gap-4 ml-6 md:ml-8 py-2.5 sm:p-2.5 sm:flex xl:p-5">
               <button
                 className="bg-danger text-white sm:px-3 px-1 sm:py-2 rounded-sm"
-                  onClick={() => handleDelete(order._id)}
+                onClick={() => handleDelete(order._id)}
               >
                 <MdDelete />
               </button>
