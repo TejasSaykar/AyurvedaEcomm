@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import CardOne1 from '../../components/CardOne1.jsx';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const ECommerce = () => {
   const apiUrl = import.meta.env.VITE_BASE_URL;
@@ -41,12 +41,14 @@ const ECommerce = () => {
           <h4 className="mb-6 text-xl font-semibold text-black dark:text-white">
             Products
           </h4>
-          <button
-            className="mb-6 text-base font-semibold bg-meta-5 text-white px-4 py-2 rounded-sm dark:text-white"
-            onClick={() => navigate(`${'/create/create-product'}`)}
-          >
-            Create Product
-          </button>
+          {localStorage.getItem('isAdmin') && (
+            <button
+              className="mb-6 text-base font-semibold bg-meta-5 text-white px-4 py-2 rounded-sm dark:text-white"
+              onClick={() => navigate(`${'/create/create-product'}`)}
+            >
+              Create Product
+            </button>
+          )}
         </div>
         {products.length < 1 ? (
           <h1 className="w-full text-center font-bold text-2xl pt-20">
@@ -55,7 +57,20 @@ const ECommerce = () => {
         ) : (
           <h2>Total {products.length} Products Available</h2>
         )}
-        <div className="grid grid-cols-2 rounded-sm bg-gray-2 dark:bg-meta-4 sm:grid-cols-5">
+
+        {!localStorage.getItem('isAdmin') && (
+          <div className="text-xl text-center pb-4">
+            <Link to={'/auth/signin'} className="underline">
+              Login as Admin to perform any operation
+            </Link>
+          </div>
+        )}
+
+        <div
+          className={`grid grid-cols-2 rounded-sm bg-gray-2 dark:bg-meta-4 sm:${
+            localStorage.getItem('isAdmin') ? 'grid-cols-5' : 'grid-cols-4'
+          }`}
+        >
           <div className="hidden sm:block p-2.5 xl:p-5">
             <h5 className="text-sm font-medium uppercase xsm:text-base">
               Image
@@ -76,11 +91,13 @@ const ECommerce = () => {
               Is Combo
             </h5>
           </div>
-          <div className="hidden p-2.5 text-center sm:block xl:p-5">
-            <h5 className="text-sm font-medium uppercase xsm:text-base">
-              Action
-            </h5>
-          </div>
+          {localStorage.getItem('isAdmin') && (
+            <div className="hidden p-2.5 text-center sm:block xl:p-5">
+              <h5 className="text-sm font-medium uppercase xsm:text-base">
+                Action
+              </h5>
+            </div>
+          )}
         </div>
         {products.length > 0 &&
           products.map((items, index) => (

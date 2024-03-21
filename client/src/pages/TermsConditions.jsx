@@ -5,7 +5,7 @@ const TermsConditions = () => {
   return (
     <Layout>
       <div className="w-full">
-        <div className="md:w-[70%] px-4 md:px-0 mx-auto flex flex-col gap-7 py-8">
+        <div className="md:w-[70%] px-4 md:px-0 mx-auto flex flex-col gap-7 py-12">
           <h2 className="text-3xl font-semibold">Terms And Conditions</h2>
           <h3 className="text-2xl font-semibold">TERMS OF USE</h3>
           <div className="flex flex-col gap-4 font-normal text-[15px]">

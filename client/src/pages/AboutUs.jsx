@@ -5,7 +5,7 @@ const AboutUs = () => {
   return (
     <Layout>
       <div className="w-full">
-        <div className="w-[70%] mx-auto py-8 flex flex-col gap-8">
+        <div className="w-[70%] mx-auto py-12 flex flex-col gap-8">
           <h2 className="text-3xl font-semibold">About Us</h2>
           <p>
             Rajputana Agrico got established in the year 2007 by Mr. Shrawan

@@ -6,19 +6,41 @@ const FormElements = () => {
   const navigate = useNavigate();
   const apiUrl = import.meta.env.VITE_BASE_URL;
   const [category, setCategory] = useState('');
+  const [file, setFile] = useState(null);
+
+  console.log('Cat Image :', file);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const res = await axios.post(`${apiUrl}/api/category/create-category`, {
-        name: category,
-      });
-      if (res.data) {
-        // console.log('Category : ', res.data);
-        navigate('/category');
+    let cat = {
+      category,
+      file,
+    };
+    if (file) {
+      const data = new FormData();
+      const filename = Date.now() + file.name;
+      data.append('name', filename);
+      data.append('file', file);
+      cat.file = filename;
+
+      try {
+        await axios.post(`${import.meta.env.VITE_BASE_URL}/upload/image`, data);
+      } catch (error) {
+        console.log(error);
+        // message.error(error.response.data.message)
       }
-    } catch (error) {
-      console.log(error);
+      try {
+        const res = await axios.post(`${apiUrl}/api/category/create-category`, {
+          name: cat.category,
+          img: cat.file,
+        });
+        if (res.data) {
+          console.log('Category : ', res.data);
+          navigate('/category');
+        }
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
 
@@ -48,6 +70,19 @@ const FormElements = () => {
                       placeholder="Enter category"
                       value={category}
                       onChange={(e) => setCategory(e.target.value)}
+                      className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                    />
+                  </div>
+                  <div className="w-full xl:w-1/2">
+                    <label className="mb-2.5 block text-black dark:text-white">
+                      {/* Email <span className="text-meta-1">*</span> */}
+                      Category Image
+                    </label>
+                    <input
+                      type="file"
+                      // placeholder="Enter category"
+                      // value={image}
+                      onChange={(e) => setFile(e.target.files?.[0])}
                       className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                     />
                   </div>

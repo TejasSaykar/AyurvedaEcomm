@@ -357,7 +357,7 @@ const Navbar = () => {
                           <div key={item._id} className="flex gap-2 mt-4">
                             <div className="relative p-2">
                               <img
-                                src={`https://brahmand.online:8181/images/${item.image}`}
+                                src={`http://localhost:8181/images/${item.image}`}
                                 className="h-32 w-32 object-cover bg-cover"
                                 alt=""
                               />
@@ -444,7 +444,7 @@ const Navbar = () => {
         </div>
       </div>
       <div className="bottom relative hidden w-full border-t-[1px] h-12 md:flex items-center">
-        <div className="w-[80%] h-full mx-auto flex justify-between text-sm text-gray-700">
+        <div className="w-[80%] h-full mx-auto flex justify-around text-sm text-gray-700">
           <div className="relative h-full">
             <button
               onMouseEnter={() => {
@@ -538,7 +538,7 @@ const Navbar = () => {
           >
             COMBOS
           </Link>
-          <Link
+          {/* <Link
             className={`hover:border-b-2 hover:border-b-black h-full flex items-center border-2 border-transparent`}
             style={{ letterSpacing: "3px" }}
           >
@@ -555,7 +555,7 @@ const Navbar = () => {
             style={{ letterSpacing: "3px" }}
           >
             CONSULT BY VAIDYA
-          </Link>
+          </Link> */}
         </div>
       </div>
 
@@ -640,12 +640,12 @@ const Navbar = () => {
                 <RiArrowRightSLine />
               </span>
             </div>
-            <div className="flex justify-between">
+            {/* <div className="flex justify-between">
               <Link className="">Offers</Link>
               <span className="cursor-pointer text-xl">
                 <RiArrowRightSLine />
               </span>
-            </div>
+            </div> */}
           </div>
         </div>
       )}

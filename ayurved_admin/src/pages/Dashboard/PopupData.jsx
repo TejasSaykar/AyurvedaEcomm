@@ -87,7 +87,7 @@ const PopupData = () => {
               <div className="flex-shrink-0 flex gap-1 py-2 scroll-container overflow-x-scroll w-[150px] md:w-[200px]">
                 {order?.products?.map((product) => (
                   <img
-                    src={`https://brahmand.online:8181/images/${product?.image}`}
+                    src={`http://localhost:8181/images/${product?.image}`}
                     className="h-10 w-10 rounded-full object-cover bg-cover"
                     alt="Brand"
                   />

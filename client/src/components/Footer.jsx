@@ -8,38 +8,50 @@ import { FaXTwitter } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 
 const Footer = () => {
+  const prodMenu = [
+    {
+      name: "Juices",
+      path: "juices",
+    },
+    {
+      name: "Herbal Powders",
+      path: "herbalpowder",
+    },
+    {
+      name: "Tablets",
+      path: "tablets",
+    },
+    {
+      name: "Oils",
+      path: "oils",
+    },
+  ];
   return (
     <>
       <div className="w-full bg-sky-50 border-t-[1px] border-b-[1.5px]">
-        <div className="grid grid-cols-1 gap-5 md:gap-2 md:grid-cols-5 py-10 w-[80%] mx-auto">
+        <div className="grid grid-cols-1 gap-5 md:gap-2 md:grid-cols-4 py-10 w-[80%] mx-auto">
           <div className="one flex flex-col gap-3">
             <h1 className="md:text-base text-2xl font-semibold">Shop</h1>
             <div className="flex flex-col gap-2 text-lg md:text-sm">
-              <h4 className="cursor-pointer">Juices</h4>
-              <h4 className="cursor-pointer">Herbal Powders/Churna</h4>
-              <h4 className="cursor-pointer">Tablets</h4>
-              <h4 className="cursor-pointer">Oils</h4>
-              <h4 className="cursor-pointer">Cosmetics</h4>
+              {prodMenu.map((item) => (
+                <Link key={item.name} to={`/shop-by-prod/${item.path}`}>
+                  {item.name}
+                </Link>
+              ))}
             </div>
           </div>
           <div className="two flex flex-col gap-3">
             <h1 className="md:text-base text-2xl font-semibold">About</h1>
             <div className="flex flex-col text-lg gap-2 md:text-sm">
-              <h4 className="cursor-pointer">About Us</h4>
-              <h4 className="cursor-pointer">Contact Us</h4>
-              <h4 className="cursor-pointer">Media</h4>
-              <h4 className="cursor-pointer">Work with us</h4>
-              <h4 className="cursor-pointer">Blog</h4>
-            </div>
-          </div>
-          <div className="three flex flex-col gap-3">
-            <h1 className="md:text-base text-2xl font-semibold">
-              Your Account
-            </h1>
-            <div className="flex flex-col gap-2 md:text-sm text-lg">
-              <h4 className="cursor-pointer">Login</h4>
-              <h4 className="cursor-pointer">Become an Affiliate</h4>
-              <h4 className="cursor-pointer">Rewards</h4>
+              <Link to={"/about-us"} className="cursor-pointer">
+                About Us
+              </Link>
+              <Link to={"/contact-us"} className="cursor-pointer">
+                Contact Us
+              </Link>
+              <Link to={"/terms-and-conditions"} className="cursor-pointer">
+                Terms And Conditions
+              </Link>
             </div>
           </div>
           <div className="four flex flex-col gap-3">

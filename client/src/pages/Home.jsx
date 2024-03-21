@@ -13,6 +13,7 @@ import Popup from "./Popup";
 
 const Home = () => {
   const [products, setProducts] = useState([]);
+  const [categories, setCategories] = useState([]);
   const [banners, setBanners] = useState([]);
   const navigate = useNavigate();
 
@@ -28,6 +29,19 @@ const Home = () => {
     cssEase: "ease-in-out",
     fade: true,
   };
+
+  useEffect(() => {
+    const fetchCat = async () => {
+      const { data } = await axios.get(
+        `${import.meta.env.VITE_BASE_URL}/api/category/get-categories`
+      );
+      if (data) {
+        console.log("Categories : ", data);
+        setCategories(data.categories);
+      }
+    };
+    fetchCat();
+  }, []);
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -65,7 +79,7 @@ const Home = () => {
             {banners.map((b) => (
               <div className="slick-slide w-full h-full flex">
                 <img
-                  src={`https://brahmand.online:8181/images/${b.bannerImage}`}
+                  src={`http://localhost:8181/images/${b.bannerImage}`}
                   className="w-full h-[500px] object-cover aspect-video -z-10"
                   alt=""
                 />
@@ -89,7 +103,7 @@ const Home = () => {
                     </span>
                   )}
                   <img
-                    src={`https://brahmand.online:8181/images/${product.image}`}
+                    src={`http://localhost:8181/images/${product.image}`}
                     className="xl:bg-transparent aspect-square bg-cover object-cover"
                     alt=""
                   />
@@ -107,177 +121,6 @@ const Home = () => {
                   </div>
                 </Link>
               ))}
-              {/* <div className="bg-gray-200/30 cursor-pointer rounded-xl p-4 flex flex-col gap-1">
-                <img
-                  src="/img/pop2.webp"
-                  className="xl:bg-transparent"
-                  alt=""
-                />
-                <h2>Diabic Care Juice</h2>
-                <p>
-                  from <span>₹450</span>
-                </p>
-                <div className="flex gap-1 items-center text-emerald-500">
-                  <IoIosStar />
-                  <IoIosStar />
-                  <IoIosStar />
-                  <IoIosStar />
-                  <IoIosStarHalf />
-                  <span>(159)</span>
-                </div>
-              </div>
-              <div className="bg-gray-200/30 cursor-pointer rounded-xl p-4 flex flex-col gap-1">
-                <img
-                  src="/img/pop3.webp"
-                  className="xl:bg-transparent"
-                  alt=""
-                />
-                <h2>Diabic Care Juice</h2>
-                <p>
-                  from <span>₹450</span>
-                </p>
-                <div className="flex gap-1 items-center text-emerald-500">
-                  <IoIosStar />
-                  <IoIosStar />
-                  <IoIosStar />
-                  <IoIosStar />
-                  <IoIosStarHalf />
-                  <span>(159)</span>
-                </div>
-              </div>
-              <div className="bg-gray-200/30 cursor-pointer rounded-xl p-4 flex flex-col gap-1">
-                <img
-                  src="/img/pop4.webp"
-                  className="xl:bg-transparent"
-                  alt=""
-                />
-                <h2>Diabic Care Juice</h2>
-                <p>
-                  from <span>₹450</span>
-                </p>
-                <div className="flex gap-1 items-center text-emerald-500">
-                  <IoIosStar />
-                  <IoIosStar />
-                  <IoIosStar />
-                  <IoIosStar />
-                  <IoIosStarHalf />
-                  <span>(159)</span>
-                </div>
-              </div>
-              <div className="bg-gray-200/30 cursor-pointer rounded-xl p-4 flex flex-col gap-1">
-                <img
-                  src="/img/pop5.avif"
-                  className="xl:bg-transparent"
-                  alt=""
-                />
-                <h2>Diabic Care Juice</h2>
-                <p>
-                  from <span>₹450</span>
-                </p>
-                <div className="flex gap-1 items-center text-emerald-500">
-                  <IoIosStar />
-                  <IoIosStar />
-                  <IoIosStar />
-                  <IoIosStar />
-                  <IoIosStarHalf />
-                  <span>(159)</span>
-                </div>
-              </div>
-              <div className="bg-gray-200/30 cursor-pointer rounded-xl p-4 flex flex-col gap-1">
-                <img
-                  src="/img/pop4.webp"
-                  className="xl:bg-transparent"
-                  alt=""
-                />
-                <h2>Diabic Care Juice</h2>
-                <p>
-                  from <span>₹450</span>
-                </p>
-                <div className="flex gap-1 items-center text-emerald-500">
-                  <IoIosStar />
-                  <IoIosStar />
-                  <IoIosStar />
-                  <IoIosStar />
-                  <IoIosStarHalf />
-                  <span>(159)</span>
-                </div>
-              </div>
-              <div className="bg-gray-200/30 cursor-pointer rounded-xl p-4 flex flex-col gap-1">
-                <img
-                  src="/img/pop3.webp"
-                  className="xl:bg-transparent"
-                  alt=""
-                />
-                <h2>Diabic Care Juice</h2>
-                <p>
-                  from <span>₹450</span>
-                </p>
-                <div className="flex gap-1 items-center text-emerald-500">
-                  <IoIosStar />
-                  <IoIosStar />
-                  <IoIosStar />
-                  <IoIosStar />
-                  <IoIosStarHalf />
-                  <span>(159)</span>
-                </div>
-              </div>
-              <div className="bg-gray-200/30 cursor-pointer rounded-xl p-4 flex flex-col gap-1">
-                <img
-                  src="/img/pop5.avif"
-                  className="xl:bg-transparent"
-                  alt=""
-                />
-                <h2>Diabic Care Juice</h2>
-                <p>
-                  from <span>₹450</span>
-                </p>
-                <div className="flex gap-1 items-center text-emerald-500">
-                  <IoIosStar />
-                  <IoIosStar />
-                  <IoIosStar />
-                  <IoIosStar />
-                  <IoIosStarHalf />
-                  <span>(159)</span>
-                </div>
-              </div>
-              <div className="bg-gray-200/30 cursor-pointer rounded-xl p-4 flex flex-col gap-1">
-                <img
-                  src="/img/pop1.webp"
-                  className="xl:bg-transparent"
-                  alt=""
-                />
-                <h2>Diabic Care Juice</h2>
-                <p>
-                  from <span>₹450</span>
-                </p>
-                <div className="flex gap-1 items-center text-emerald-500">
-                  <IoIosStar />
-                  <IoIosStar />
-                  <IoIosStar />
-                  <IoIosStar />
-                  <IoIosStarHalf />
-                  <span>(159)</span>
-                </div>
-              </div>
-              <div className="bg-gray-200/30 cursor-pointer rounded-xl p-4 flex flex-col gap-1">
-                <img
-                  src="/img/pop2.webp"
-                  className="xl:bg-transparent"
-                  alt=""
-                />
-                <h2>Diabic Care Juice</h2>
-                <p>
-                  from <span>₹450</span>
-                </p>
-                <div className="flex gap-1 items-center text-emerald-500">
-                  <IoIosStar />
-                  <IoIosStar />
-                  <IoIosStar />
-                  <IoIosStar />
-                  <IoIosStarHalf />
-                  <span>(159)</span>
-                </div>
-              </div> */}
             </Link>
           </div>
         </div>
@@ -286,14 +129,17 @@ const Home = () => {
           <div>
             <h2 className="my-8 text-2xl font-semibold">Popular Categories</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-4">
-              <div>
-                <img
-                  src="/img/cat1.webp"
-                  className="rounded-full w-2/3 md:w-full mx-auto cursor-pointer hover:transition-transform duration-300 hover:shadow-lg hover:-translate-y-1"
-                  alt=""
-                />
-              </div>
-              <div>
+              {categories.slice(0, 6).map((cat) => (
+                <div>
+                  <img
+                    onClick={() => navigate(`/shop-by-cat/${cat.name}`)}
+                    src={`http://localhost:8181/images/${cat.img}`}
+                    className="rounded-full w-2/3 md:w-full mx-auto cursor-pointer hover:transition-transform duration-300 hover:shadow-lg hover:-translate-y-1"
+                    alt=""
+                  />
+                </div>
+              ))}
+              {/* <div>
                 <img
                   src="/img/cat2.webp"
                   className="rounded-full w-2/3 md:w-full mx-auto cursor-pointer hover:transition-transform duration-300 hover:shadow-lg hover:-translate-y-1"
@@ -327,7 +173,7 @@ const Home = () => {
                   className="rounded-full w-2/3 md:w-full mx-auto cursor-pointer hover:transition-transform duration-300 hover:shadow-lg hover:-translate-y-1"
                   alt=""
                 />
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

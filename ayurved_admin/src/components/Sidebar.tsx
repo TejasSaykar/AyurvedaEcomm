@@ -98,11 +98,11 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
         <nav className="mt-5 py-4 px-4 lg:mt-2 lg:px-6">
           {/* <!-- Menu Group --> */}
           <div>
-            <h3 className="mb-4 ml-4 text-sm font-semibold text-bodydark2">
+            {localStorage.getItem("isAdmin") && <h3 className="mb-4 ml-4 text-sm font-semibold text-bodydark2">
               MENU
-            </h3>
+            </h3>}
 
-            <ul className="mb-6 flex flex-col gap-1.5">
+            {localStorage.getItem("isAdmin") && <ul className="mb-6 flex flex-col gap-1.5">
               {/* <!-- Menu Item Dashboard --> */}
               <SidebarLinkGroup
                 activeCondition={
@@ -544,16 +544,16 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                   Settings
                 </NavLink>
               </li> */}
-            </ul>
+            </ul>}
           </div>
 
           <div>
-            <h3 className="mb-4 ml-4 text-sm font-semibold text-bodydark2">
+            {/* <h3 className="mb-4 ml-4 text-sm font-semibold text-bodydark2">
               OTHERS
-            </h3>
+            </h3> */}
 
             <ul className="mb-6 flex flex-col gap-1.5">
-              <li>
+              {/* <li>
                 <NavLink
                   to="/chart"
                   className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
@@ -591,7 +591,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                   </svg>
                   Chart
                 </NavLink>
-              </li>
+              </li> */}
 
               {/* <SidebarLinkGroup
                 activeCondition={pathname === '/ui' || pathname.includes('ui')}
@@ -698,7 +698,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                   );
                 }}
               </SidebarLinkGroup> */}
-              {/* <SidebarLinkGroup
+              <SidebarLinkGroup
                 activeCondition={
                   pathname === '/auth' || pathname.includes('auth')
                 }
@@ -773,7 +773,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                         }`}
                       >
                         <ul className="mt-4 mb-5.5 flex flex-col gap-2.5 pl-6">
-                          <li>
+                          {!localStorage.getItem("isAdmin") && <li>
                             <NavLink
                               to="/auth/signin"
                               className={({ isActive }) =>
@@ -783,24 +783,25 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                             >
                               Sign In
                             </NavLink>
-                          </li>
-                          <li>
+                          </li>}
+                         {localStorage.getItem("isAdmin") && <li>
                             <NavLink
-                              to="/auth/signup"
+                              to="/auth/signin"
+                              onClick={() => localStorage.clear()}
                               className={({ isActive }) =>
                                 'group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ' +
                                 (isActive && '!text-white')
                               }
                             >
-                              Sign Up
+                              Logout
                             </NavLink>
-                          </li>
+                          </li>}
                         </ul>
                       </div>
                     </React.Fragment>
                   );
                 }}
-              </SidebarLinkGroup> */}
+              </SidebarLinkGroup>
             </ul>
           </div>
         </nav>

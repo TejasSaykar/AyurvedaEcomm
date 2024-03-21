@@ -1,5 +1,5 @@
 import { Suspense, lazy, useEffect, useState } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 
 import ECommerce from './pages/Dashboard/Products';
@@ -25,6 +25,8 @@ function App() {
     setTimeout(() => setLoading(false), 1000);
   }, []);
 
+  const login = false;
+
   return loading ? (
     <Loader />
   ) : (
@@ -35,17 +37,61 @@ function App() {
         containerClassName="overflow-auto"
       />
       <Routes>
-        <Route path="/auth/signin" element={<SignIn />} />
-        <Route path="/auth/signup" element={<SignUp />} />
+        <>
+          <Route path="/auth/signin" element={<SignIn />} />
+          <Route path="/auth/signup" element={<SignUp />} />
+        </>
         <Route element={<DefaultLayout />}>
           <Route index element={<ECommerce />} />
-          <Route path="/category" element={<EditNews />} />
-          <Route path="/update-product/:id" element={<UpdateProduct />} />
-          <Route path="/update-category/:id" element={<UpdateCategory />} />
-          <Route path="/orders" element={<Orders />} />
-          <Route path="/banner" element={<Banner />} />
-          <Route path="/combos" element={<Combos />} />
-          <Route path="/popup" element={<PopupData />} />
+          {/* <Route path="/category" element={<EditNews />} /> */}
+          <Route
+            path="/update-product/:id"
+            element={
+              <IsAdmin>
+                <UpdateProduct />
+              </IsAdmin>
+            }
+          />
+          <Route
+            path="/update-category/:id"
+            element={
+              <IsAdmin>
+                <UpdateCategory />
+              </IsAdmin>
+            }
+          />
+          <Route
+            path="/orders"
+            element={
+              <IsAdmin>
+                <Orders />
+              </IsAdmin>
+            }
+          />
+          <Route
+            path="/banner"
+            element={
+              <IsAdmin>
+                <Banner />
+              </IsAdmin>
+            }
+          />
+          <Route
+            path="/combos"
+            element={
+              <IsAdmin>
+                <Combos />
+              </IsAdmin>
+            }
+          />
+          <Route
+            path="/popup"
+            element={
+              <IsAdmin>
+                <PopupData />
+              </IsAdmin>
+            }
+          />
           {/* <Route path="/create-combo" element={<CreateCombos />} /> */}
           {routes.map((routes, index) => {
             const { path, component: Component } = routes;
@@ -55,7 +101,9 @@ function App() {
                 path={path}
                 element={
                   <Suspense fallback={<Loader />}>
-                    <Component />
+                    <IsAdmin>
+                      <Component />
+                    </IsAdmin>
                   </Suspense>
                 }
               />
@@ -65,6 +113,14 @@ function App() {
       </Routes>
     </>
   );
+}
+
+export function IsAdmin(props) {
+  if (localStorage.getItem('isAdmin')) {
+    return props.children;
+  } else {
+    return <Navigate to={'/auth/signin'} />;
+  }
 }
 
 export default App;

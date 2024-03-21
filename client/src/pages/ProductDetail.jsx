@@ -53,7 +53,7 @@ const ProductDetail = () => {
         <div className="w-full grid md:grid-cols-2 px-3 pt-10 md:px-8">
           <div className="left w-full">
             <img
-              src={`https://brahmand.online:8181/images/${product.image}`}
+              src={`http://localhost:8181/images/${product.image}`}
               className="md:h-[90%] w-full border py-5 px-4 md:w-[90%] md:aspect-square object-cover"
               alt=""
             />
