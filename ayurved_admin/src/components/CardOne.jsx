@@ -6,7 +6,7 @@ import { MdDelete } from 'react-icons/md';
 const CardOne = ({ item, type, fetchCategories }) => {
   const navigate = useNavigate();
   const apiUrl = import.meta.env.VITE_BASE_URL;
-  const PF = 'http://localhost:8181/images/';
+  const PF = 'https://brahmand.online:8181/images/';
   const handleUpdate = (id) => {
     navigate(`/update-category/${id}`);
   };
@@ -51,7 +51,7 @@ const CardOne = ({ item, type, fetchCategories }) => {
           <div className="hidden sm:flex items-center justify-center p-2.5 xl:p-5">
             <img
               className="text-meta-3 w-12 object-cover bg-cover h-14"
-              src={`http://localhost:8181/images/${item.img}`}
+              src={`https://brahmand.online:8181/images/${item.img}`}
             />
           </div>
 

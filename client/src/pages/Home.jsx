@@ -79,7 +79,7 @@ const Home = () => {
             {banners.map((b) => (
               <div className="slick-slide w-full h-full flex">
                 <img
-                  src={`http://localhost:8181/images/${b.bannerImage}`}
+                  src={`https://brahmand.online:8181/images/${b.bannerImage}`}
                   className="w-full h-[500px] object-cover aspect-video -z-10"
                   alt=""
                 />
@@ -103,7 +103,7 @@ const Home = () => {
                     </span>
                   )}
                   <img
-                    src={`http://localhost:8181/images/${product.image}`}
+                    src={`https://brahmand.online:8181/images/${product.image}`}
                     className="xl:bg-transparent aspect-square bg-cover object-cover"
                     alt=""
                   />
@@ -133,7 +133,7 @@ const Home = () => {
                 <div>
                   <img
                     onClick={() => navigate(`/shop-by-cat/${cat.name}`)}
-                    src={`http://localhost:8181/images/${cat.img}`}
+                    src={`https://brahmand.online:8181/images/${cat.img}`}
                     className="rounded-full w-2/3 md:w-full mx-auto cursor-pointer hover:transition-transform duration-300 hover:shadow-lg hover:-translate-y-1"
                     alt=""
                   />

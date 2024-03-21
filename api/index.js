@@ -6,6 +6,7 @@ const productRoute = require("./routes/productRoute");
 const uploadController = require("./controllers/uploadController");
 const categoryRoute = require("./routes/categoryRoute");
 const bannerRoute = require("./routes/bannerRoute");
+const contactRoute = require("./routes/contactRoute");
 const path = require("path");
 const fs = require("fs");
 const https = require("https");
@@ -28,6 +29,7 @@ app.use("/api/product", productRoute);
 app.use("/api/category", categoryRoute);
 app.use("/upload", uploadController);
 app.use("/banner", bannerRoute);
+app.use("/api/user", contactRoute);
 
 app.get("/", (req, res) => {
   res.send("Hello From Ayurved Ecomm");
@@ -58,7 +60,7 @@ app.get("/", (req, res) => {
 // })
 
 const PORT = 8181;
-const appInProduction = false;
+const appInProduction = true;
 if (!appInProduction) {
   app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT} ✅`);
