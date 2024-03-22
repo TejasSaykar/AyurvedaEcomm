@@ -357,7 +357,7 @@ const Navbar = () => {
                           <div key={item._id} className="flex gap-2 mt-4">
                             <div className="relative p-2">
                               <img
-                                src={`https://brahmand.online:8181/images/${item.image}`}
+                                src={`http://localhost:8181/images/${item.image}`}
                                 className="h-32 w-32 object-cover bg-cover"
                                 alt=""
                               />
@@ -538,13 +538,16 @@ const Navbar = () => {
           >
             COMBOS
           </Link>
-          {/* <Link
-            className={`hover:border-b-2 hover:border-b-black h-full flex items-center border-2 border-transparent`}
+          <Link
+            className={`${
+              location.pathname === "/contact-us" && "text-sm font-bold"
+            }hover:border-b-2 hover:border-b-black h-full flex items-center border-2 border-transparent`}
+            to={"/contact-us"}
             style={{ letterSpacing: "3px" }}
           >
-            OFFERS
+            CONTACT US
           </Link>
-          <Link
+          {/* <Link
             className="hover:border-b-2 hover:border-b-black h-full flex items-center  border-2 border-transparent"
             style={{ letterSpacing: "3px" }}
           >

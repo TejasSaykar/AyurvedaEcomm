@@ -34,6 +34,15 @@ const ProductDetail = () => {
     }, 3000);
   };
 
+  const placeOrder = () => {
+    dispatch(addToCart({ ...product, quantity }));
+    setMessage(true);
+    navigate("/place-order");
+    setTimeout(() => {
+      setMessage(false);
+    }, 3000);
+  };
+
   useEffect(() => {
     fetchSingleProd();
   }, [id, quantity, addToCartProd]);
@@ -53,7 +62,7 @@ const ProductDetail = () => {
         <div className="w-full grid md:grid-cols-2 px-3 pt-10 md:px-8">
           <div className="left w-full">
             <img
-              src={`https://brahmand.online:8181/images/${product.image}`}
+              src={`http://localhost:8181/images/${product.image}`}
               className="md:h-[90%] w-full border py-5 px-4 md:w-[90%] md:aspect-square object-cover"
               alt=""
             />
@@ -106,13 +115,22 @@ const ProductDetail = () => {
                       Out Of Stock
                     </button>
                   ) : (
-                    <button
-                      disabled={product.quantity < 1}
-                      onClick={addToCartProd}
-                      className="cursor-pointer w-full bg-orange-600 px-6 py-2 rounded-full"
-                    >
-                      Add To Cart
-                    </button>
+                    <div className="flex flex-col gap-4">
+                      <button
+                        disabled={product.quantity < 1}
+                        onClick={addToCartProd}
+                        className="cursor-pointer w-full bg-orange-600 px-6 py-2 rounded-full"
+                      >
+                        Add To Cart
+                      </button>
+                      <button
+                        disabled={product.quantity < 1}
+                        onClick={placeOrder}
+                        className="cursor-pointer w-full bg-green-600 px-6 py-2 rounded-full"
+                      >
+                        Place Order
+                      </button>
+                    </div>
                   )}
                 </div>
 

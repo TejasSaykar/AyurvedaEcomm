@@ -33,9 +33,16 @@ const ContactUs = () => {
     <Layout>
       <div className="w-full pt-5">
         <div className="top">{/* <h3>Contact Us</h3> */}</div>
-        <div className="form w-full h-full flex bg-sky-200/30 mb-10 p-4 md:p-10">
+        <div className="form w-full h-full flex bg-[#FBFADA]/40 p-4 md:p-10">
           <form className="md:w-[77%] mx-auto flex flex-col gap-5">
-            <h2 className="text-2xl text-center font-semibold">Contact Us</h2>
+            <div className="text-center">
+              <h2 className="text-4xl font-bold text-[#1B4242] pb-5">
+                Contact Us Today !
+              </h2>
+              <h4 className="text-3xl font-medium">
+                Let's Get Fit & Healthy Together
+              </h4>
+            </div>
             <div className="flex flex-col md:flex-row w-full gap-5">
               <div className="w-full flex flex-col gap-2">
                 <label htmlFor="" className="">
@@ -47,7 +54,7 @@ const ContactUs = () => {
                   onChange={(e) =>
                     setInputs({ ...inputs, name: e.target.value })
                   }
-                  className="w-full px-2 border-[1px] border-gray-100 py-2 placeholder:text-gray-400"
+                  className="w-full px-2 border-[1px] border-gray-200 py-2 placeholder:text-gray-400"
                   placeholder="Name"
                 />
               </div>
@@ -61,7 +68,7 @@ const ContactUs = () => {
                   onChange={(e) =>
                     setInputs({ ...inputs, email: e.target.value })
                   }
-                  className="w-full px-2 border-[1px] border-gray-100 py-2 placeholder:text-gray-400"
+                  className="w-full px-2 border-[1px] border-gray-200 py-2 placeholder:text-gray-400"
                   placeholder="Email"
                 />
               </div>
@@ -74,14 +81,14 @@ const ContactUs = () => {
                 onChange={(e) =>
                   setInputs({ ...inputs, phone: e.target.value })
                 }
-                className="w-full px-2 border-[1px] border-gray-100 py-2 placeholder:text-gray-400"
+                className="w-full px-2 border-[1px] border-gray-200 py-2 placeholder:text-gray-400"
                 placeholder="Phone"
               />
             </div>
             <div className="flex flex-col gap-2">
               <label htmlFor="">Message</label>
               <textarea
-                className="w-full p-2 border-[1px] border-gray-100 placeholder:text-gray-400"
+                className="w-full p-2 border-[1px] border-gray-200 placeholder:text-gray-400"
                 value={inputs.message}
                 onChange={(e) =>
                   setInputs({ ...inputs, message: e.target.value })

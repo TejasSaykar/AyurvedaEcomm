@@ -49,7 +49,7 @@ const Orders = () => {
                   Loading...
                 </h2>
               )}
-              <div className="grid grid-cols-2  rounded-sm bg-[#1a4d3b] text-white sm:grid-cols-3">
+              <div className="grid grid-cols-2  rounded-sm bg-[#1a4d3b] text-white sm:grid-cols-4">
                 <div className="p-2.5 text-center xl:p-5">
                   <h5 className="text-sm font-medium uppercase xsm:text-base">
                     Status
@@ -60,6 +60,11 @@ const Orders = () => {
                     Buyer Name
                   </h5>
                 </div>
+                <div className="p-2.5 text-center xl:p-5">
+                  <h5 className="text-sm font-medium uppercase xsm:text-base">
+                    Address
+                  </h5>
+                </div>
                 <div className="hidden p-2.5 text-center sm:block xl:p-5">
                   <h5 className="text-sm font-medium uppercase xsm:text-base">
                     Products
@@ -68,20 +73,24 @@ const Orders = () => {
               </div>
 
               {order.map((item) => (
-                <div className="grid grid-cols-2 md:grid-cols-3 border-b border-stroke sm:grid-cols-3">
+                <div className="grid grid-cols-2 md:grid-cols-4 border-b border-stroke sm:grid-cols-3">
                   <div className="flex items-center justify-center p-2.5 xl:p-5">
                     <p className="text-black">{item?.status}</p>
                   </div>
 
                   <div className="flex items-center justify-center p-2.5 xl:p-5">
-                    <p className="text-meta-3">{item?.buyer.username}</p>
+                    <p className="text-meta-3">{item?.fullname}</p>
+                  </div>
+
+                  <div className="flex items-center justify-center p-2.5 xl:p-5">
+                    <p className="text-meta-3">{item?.flatNo}</p>
                   </div>
 
                   <div className="scroll-container1 hidden sm:flex overflow-scroll items-center gap-3 p-2.5 xl:p-5">
                     {item?.products?.map((p) => (
                       <div className="flex-shrink-0">
                         <img
-                          src={`https://brahmand.online:8181/images/${p?.image}`}
+                          src={`http://localhost:8181/images/${p?.image}`}
                           className="h-12 w-12 rounded-full object-cover bg-cover"
                           alt="Brand"
                         />

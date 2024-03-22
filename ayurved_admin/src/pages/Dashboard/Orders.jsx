@@ -87,7 +87,7 @@ const Orders = () => {
       )}
       <div className="rounded-sm w-full mx-auto border border-stroke bg-white px-5 pt-6 pb-2.5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1">
         <div className="flex flex-col">
-          <div className="grid grid-cols-2 rounded-sm bg-gray-2 dark:bg-meta-4 sm:grid-cols-5">
+          <div className="grid grid-cols-2 rounded-sm bg-gray-2 dark:bg-meta-4 sm:grid-cols-6">
             {/* <div className="hidden sm:block p-2.5 xl:p-5">
             <h5 className="text-sm font-medium uppercase xsm:text-base">
               Image
@@ -98,7 +98,7 @@ const Orders = () => {
                 Status
               </h5>
             </div>
-            <div className="p-2.5 text-center xl:p-5">
+            <div className="hidden md:block p-2.5 text-center xl:p-5">
               <h5 className="text-sm font-medium uppercase xsm:text-base">
                 Order Name
               </h5>
@@ -115,6 +115,11 @@ const Orders = () => {
             </div>
             <div className="hidden p-2.5 text-center sm:block xl:p-5">
               <h5 className="text-sm font-medium uppercase xsm:text-base">
+                Flat No
+              </h5>
+            </div>
+            <div className="hidden p-2.5 text-center sm:block xl:p-5">
+              <h5 className="text-sm font-medium uppercase xsm:text-base">
                 Action
               </h5>
             </div>
@@ -123,7 +128,7 @@ const Orders = () => {
           {orders?.map((order) => (
             <div
               key={order._id}
-              className="grid grid-cols-2 md:grid-cols-5 border-b border-stroke dark:border-strokedark sm:grid-cols-4"
+              className="grid grid-cols-2 md:grid-cols-6 border-b border-stroke dark:border-strokedark sm:grid-cols-4"
             >
               <div className="flex items-center justify-center p-2.5 xl:p-5">
                 <div className="flex flex-col gap-1">
@@ -147,25 +152,31 @@ const Orders = () => {
                 </div>
               </div>
 
-              <div className="sm:flex items-center overflow-x-scroll gap-3 w-[230px] justify-center p-2.5 xl:p-5">
+              <div className="sm:flex hidden items-center overflow-x-scroll gap-3 w-[230px] justify-center p-2.5 xl:p-5">
                 {order?.products?.map((p) => (
-                  <p className="text-meta-3 text-sm">{p?.title}</p>
+                  <p className="text-meta-3 hidden md:block text-sm">
+                    {p?.title}
+                  </p>
                 ))}
               </div>
 
               <div className="sm:flex items-center justify-center p-2.5 xl:p-5">
-                <p className="text-meta-3">{order?.buyer?.username}</p>
+                <p className="text-meta-3">{order?.fullname}</p>
               </div>
 
-              <div className="sm:flex items-center justify-center p-2.5 xl:p-5">
+              <div className="sm:flex hidden items-center justify-center p-2.5 xl:p-5">
                 <p className="text-meta-3">{order?.address}</p>
+              </div>
+
+              <div className="sm:flex hidden items-center justify-center p-2.5 xl:p-5">
+                <p className="text-meta-3">{order?.flatNo}</p>
               </div>
 
               {/* <div className="hidden sm:flex items-center gap-3 p-2.5 xl:p-5">
               <div className="flex-shrink-0 flex gap-1 py-2 scroll-container overflow-x-scroll w-[150px] md:w-[200px]">
                 {order?.products?.map((product) => (
                   <img
-                    src={`https://brahmand.online:8181/images/${product?.image}`}
+                    src={`http://localhost:8181/images/${product?.image}`}
                     className="h-10 w-10 rounded-full object-cover bg-cover"
                     alt="Brand"
                   />

@@ -8,6 +8,8 @@ import axios from "axios";
 import { useState } from "react";
 
 const PlaceOrder = () => {
+  const [fullname, setFullname] = useState("");
+  const [flatNo, setFlatNo] = useState("");
   const [phone, setPhone] = useState("");
   const [pincode, setPincode] = useState("");
   const [address, setAddress] = useState("");
@@ -46,6 +48,8 @@ const PlaceOrder = () => {
         `${import.meta.env.VITE_BASE_URL}/api/auth/order`,
         {
           products,
+          fullname,
+          flatNo,
           phone,
           email,
           pincode,
@@ -72,17 +76,33 @@ const PlaceOrder = () => {
             <h2 className="text-3xl font-semibold">Add Shipping Address</h2>
             <div className="flex flex-col md:flex-row gap-4 p-2">
               <input
+                type="text"
+                value={fullname}
+                onChange={(e) => setFullname(e.target.value)}
+                className="w-full ring-1 px-2 py-2 placeholder:text-gray-500 rounded-sm ring-gray-300"
+                placeholder="Fullname"
+              />
+              <input
+                type="text"
+                value={flatNo}
+                onChange={(e) => setFlatNo(e.target.value)}
+                className="w-full ring-1 px-2 py-2 placeholder:text-gray-500 rounded-sm ring-gray-300"
+                placeholder="Flat Number"
+              />
+            </div>
+            <div className="flex flex-col md:flex-row gap-4 p-2">
+              <input
                 type="number"
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
-                className="w-full ring-1 px-2 py-2 placeholder:text-gray-700 rounded-sm ring-gray-300"
+                className="w-full ring-1 px-2 py-2 placeholder:text-gray-500 rounded-sm ring-gray-300"
                 placeholder="Phone Number"
               />
               <input
                 type="number"
                 value={pincode}
                 onChange={(e) => setPincode(e.target.value)}
-                className="w-full ring-1 px-2 py-2 placeholder:text-gray-700 rounded-sm ring-gray-300"
+                className="w-full ring-1 px-2 py-2 placeholder:text-gray-500 rounded-sm ring-gray-300"
                 placeholder="Pincode"
               />
             </div>
@@ -91,7 +111,7 @@ const PlaceOrder = () => {
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full ring-1 px-2 py-2 placeholder:text-gray-700 rounded-sm ring-gray-300"
+                className="w-full ring-1 px-2 py-2 placeholder:text-gray-500 rounded-sm ring-gray-300"
                 placeholder="Email(optional)"
               />
             </div>
@@ -101,7 +121,7 @@ const PlaceOrder = () => {
                 rows="2"
                 onChange={(e) => setAddress(e.target.value)}
                 placeholder="Address"
-                className="w-full ring-1 px-2 py-2 placeholder:text-gray-700 rounded-sm ring-gray-300"
+                className="w-full ring-1 px-2 py-2 placeholder:text-gray-500 rounded-sm ring-gray-300"
               ></textarea>
             </div>
             <div>
@@ -136,7 +156,7 @@ const PlaceOrder = () => {
                         >
                           <div className="p-2">
                             <img
-                              src={`https://brahmand.online:8181/images/${item.image}`}
+                              src={`http://localhost:8181/images/${item.image}`}
                               className="h-32 w-32 object-cover bg-cover"
                               alt=""
                             />

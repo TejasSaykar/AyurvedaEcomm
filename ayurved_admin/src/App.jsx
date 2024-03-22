@@ -7,7 +7,7 @@ import SignIn from './pages/Authentication/SignIn';
 import SignUp from './pages/Authentication/SignUp';
 import Loader from './common/Loader';
 import routes from './routes';
-import EditNews from './pages/Dashboard/Category';
+import Category from './pages/Dashboard/Category';
 import UpdateProduct from './pages/Form/UpdateProduct';
 import UpdateCategory from './pages/Form/UpdateCategory';
 import Orders from './pages/Dashboard/Orders';
@@ -15,6 +15,7 @@ import Banner from './pages/Dashboard/Banner';
 import Combos from './pages/Dashboard/Combos';
 import CreateCombos from './pages/Form/CreateCombos';
 import PopupData from './pages/Dashboard/PopupData';
+import Newsletters from './pages/Dashboard/Newsletters';
 
 const DefaultLayout = lazy(() => import('./layout/DefaultLayout'));
 
@@ -43,7 +44,7 @@ function App() {
         </>
         <Route element={<DefaultLayout />}>
           <Route index element={<ECommerce />} />
-          {/* <Route path="/category" element={<EditNews />} /> */}
+          <Route path="/category" element={<Category />} />
           <Route
             path="/update-product/:id"
             element={
@@ -89,6 +90,14 @@ function App() {
             element={
               <IsAdmin>
                 <PopupData />
+              </IsAdmin>
+            }
+          />
+          <Route
+            path="/newsletters"
+            element={
+              <IsAdmin>
+                <Newsletters />
               </IsAdmin>
             }
           />

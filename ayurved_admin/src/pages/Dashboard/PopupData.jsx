@@ -5,22 +5,40 @@ import { MdDelete } from 'react-icons/md';
 const PopupData = () => {
   const [popups, setPopups] = useState([]);
 
-  useEffect(() => {
-    const fetchPopups = async () => {
-      try {
-        const { data } = await axios.get(
-          `${import.meta.env.VITE_BASE_URL}/api/auth/popups`,
-        );
-        if (data) {
-          //   console.log('Popups  : ', data);
-          setPopups(data.popups);
-        }
-      } catch (error) {
-        console.log(error);
+  const fetchPopups = async () => {
+    try {
+      const { data } = await axios.get(
+        `${import.meta.env.VITE_BASE_URL}/api/auth/popups`,
+      );
+      if (data) {
+        //   console.log('Popups  : ', data);
+        setPopups(data.popups);
       }
-    };
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
     fetchPopups();
   }, []);
+
+  const handleDelete = async (id) => {
+    const conf = confirm('Do you want tot delete this item ?');
+    if (!conf) {
+      return;
+    }
+    try {
+      const { data } = await axios.delete(
+        `${import.meta.env.VITE_BASE_URL}/api/auth/popup/${id}`,
+      );
+      if (data) {
+        console.log('Popup Deleted : ', data.popup);
+        fetchPopups();
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div className="rounded-sm w-full mx-auto border border-stroke bg-white px-5 pt-6 pb-2.5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1">
@@ -87,7 +105,7 @@ const PopupData = () => {
               <div className="flex-shrink-0 flex gap-1 py-2 scroll-container overflow-x-scroll w-[150px] md:w-[200px]">
                 {order?.products?.map((product) => (
                   <img
-                    src={`https://brahmand.online:8181/images/${product?.image}`}
+                    src={`http://localhost:8181/images/${product?.image}`}
                     className="h-10 w-10 rounded-full object-cover bg-cover"
                     alt="Brand"
                   />
@@ -98,7 +116,7 @@ const PopupData = () => {
             <div className="hidden sm:items-center md:flex sm:justify-center sm:gap-4 ml-6 md:ml-8 py-2.5 sm:p-2.5 sm:flex xl:p-5">
               <button
                 className="bg-danger text-white sm:px-3 px-1 sm:py-2 rounded-sm"
-                onClick={() => handleDelete(order._id)}
+                onClick={() => handleDelete(popup._id)}
               >
                 <MdDelete />
               </button>

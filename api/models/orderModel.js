@@ -12,6 +12,14 @@ const orderSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "user",
     },
+    fullname: {
+      type: String,
+      required: true,
+    },
+    flatNo: {
+      type: String,
+      required: true,
+    },
     phone: {
       type: Number,
       required: true,
