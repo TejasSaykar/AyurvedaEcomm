@@ -20,6 +20,14 @@ const orderSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    area: {
+      type: String,
+      required: true,
+    },
+    landmark: {
+      type: String,
+      required: true,
+    },
     phone: {
       type: Number,
       required: true,
@@ -28,7 +36,11 @@ const orderSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
-    address: {
+    town: {
+      type: String,
+      required: true,
+    },
+    state: {
       type: String,
       required: true,
     },

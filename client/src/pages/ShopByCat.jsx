@@ -1,6 +1,6 @@
 import React from "react";
 import Layout from "../components/Layout";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import { IoIosStar } from "react-icons/io";
 import { IoIosStarHalf } from "react-icons/io";
@@ -11,15 +11,26 @@ const ShopByCat = () => {
   const { slug } = useParams();
 
   const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const fetchProduct = async () => {
-      const { data } = await axios.get(
-        `${import.meta.env.VITE_BASE_URL}/api/product/product-category/${slug}`
-      );
-      if (data) {
-        // console.log("Product Category : ", data);
-        setProducts(data.products);
+      try {
+        setLoading(true);
+        const { data } = await axios.get(
+          `${
+            import.meta.env.VITE_BASE_URL
+          }/api/product/product-category/${slug}`
+        );
+        if (data) {
+          // console.log("Product Category : ", data);
+          setProducts(data.products);
+          setLoading(false);
+        }
+      } catch (error) {
+        console.log(error);
+        setLoading(false);
       }
     };
     fetchProduct();
@@ -28,14 +39,16 @@ const ShopByCat = () => {
   return (
     <Layout>
       <div className="bg-white pb-5 pt-10">
-        {products.length === 0 ? (
-          <h2 className="text-center text-xl font-semibold">
-            No products with this category
-          </h2>
+        {loading ? (
+          <h2 className="text-center text-xl font-semibold">Loading...</h2>
         ) : (
           <h2 className="text-center text-xl font-semibold">
-            {products.length} {products.length < 2 ? "product" : "Products"}{" "}
-            found with this Category
+            {/* {products.length > 0 ? products.length : "No"}{" "}
+            {products.length < 2 ? "product" : "Products"} found with this
+            Category */}
+            {products.length < 1 && "No"}
+            {location.pathname.split("/")[2]}{" "}
+            {/* {products.length > 1 ? "products" : "product"} */}
           </h2>
         )}
       </div>

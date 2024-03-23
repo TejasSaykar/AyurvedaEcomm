@@ -6,14 +6,57 @@ import { RiDeleteBin6Line } from "react-icons/ri";
 import { emptyCart, removeProduct } from "../store/cartSlice";
 import axios from "axios";
 import { useState } from "react";
+import { message } from "antd";
+
+let states = [
+  "Andaman and Nicobar Islands",
+  "Andhra Pradesh",
+  "Arunachal Pradesh",
+  "Assam",
+  "Bihar",
+  "Chandigarh",
+  "Chhattisgarh",
+  "Dadra and Nagar Haveli and Daman and Diu",
+  "Delhi",
+  "Goa",
+  "Gujarat",
+  "Haryana",
+  "Himachal Pradesh",
+  "Jammu and Kashmir",
+  "Jharkhand",
+  "Karnataka",
+  "Kerala",
+  "Ladakh",
+  "Lakshadweep",
+  "Madhya Pradesh",
+  "Maharashtra",
+  "Manipur",
+  "Meghalaya",
+  "Mizoram",
+  "Nagaland",
+  "Odisha",
+  "Puducherry",
+  "Punjab",
+  "Rajasthan",
+  "Sikkim",
+  "Tamil Nadu",
+  "Telangana",
+  "Tripura",
+  "Uttar Pradesh",
+  "Uttarakhand",
+  "West Bengal",
+];
 
 const PlaceOrder = () => {
   const [fullname, setFullname] = useState("");
   const [flatNo, setFlatNo] = useState("");
   const [phone, setPhone] = useState("");
   const [pincode, setPincode] = useState("");
-  const [address, setAddress] = useState("");
+  const [area, setArea] = useState("");
+  const [landmark, setLandmark] = useState("");
   const [email, setEmail] = useState("");
+  const [town, setTown] = useState("");
+  const [state, setState] = useState("");
   const [error, setError] = useState(false);
 
   const { products } = useSelector((state) => state.cart);
@@ -36,7 +79,7 @@ const PlaceOrder = () => {
   };
 
   const handleOrder = async () => {
-    if (!phone || !pincode || !address) {
+    if (!phone || !pincode || !town || !area || !landmark || !state) {
       setError(true);
       setTimeout(() => {
         setError(false);
@@ -51,9 +94,12 @@ const PlaceOrder = () => {
           fullname,
           flatNo,
           phone,
+          area,
+          landmark,
           email,
           pincode,
-          address,
+          town,
+          state,
           userId,
         }
       );
@@ -62,6 +108,7 @@ const PlaceOrder = () => {
         localStorage.removeItem("persist:root");
         dispatch(emptyCart());
         navigate("/orders");
+        message.success("Order Placed");
       }
     } catch (error) {
       console.log(error.response.data.message);
@@ -72,22 +119,24 @@ const PlaceOrder = () => {
     <Layout>
       <div className="w-full pb-8 pt-14 bg-[#FBFADA]">
         <div className="w-[90%] mx-auto grid bg-white gap-8 p-4 md:grid-cols-2">
-          <div className="w-full flex flex-col mt-10 gap-9 border-r-[1.2px] pr-5">
-            <h2 className="text-3xl font-semibold">Add Shipping Address</h2>
-            <div className="flex flex-col md:flex-row gap-4 p-2">
+          <div className="w-full flex flex-col mt-10 md:gap-9 border-r-[1.2px] pr-5">
+            <h2 className="text-3xl font-semibold text-center">
+              Add Shipping Address
+            </h2>
+            <div className="flex flex-col md:flex-row gap-4 p-2 mt-5">
               <input
                 type="text"
                 value={fullname}
                 onChange={(e) => setFullname(e.target.value)}
                 className="w-full ring-1 px-2 py-2 placeholder:text-gray-500 rounded-sm ring-gray-300"
-                placeholder="Fullname"
+                placeholder="Full Name"
               />
               <input
                 type="text"
                 value={flatNo}
                 onChange={(e) => setFlatNo(e.target.value)}
                 className="w-full ring-1 px-2 py-2 placeholder:text-gray-500 rounded-sm ring-gray-300"
-                placeholder="Flat Number"
+                placeholder="Flat, House no., Company, Apartment"
               />
             </div>
             <div className="flex flex-col md:flex-row gap-4 p-2">
@@ -106,6 +155,22 @@ const PlaceOrder = () => {
                 placeholder="Pincode"
               />
             </div>
+            <div className="flex flex-col md:flex-row gap-4 p-2">
+              <input
+                type="text"
+                value={area}
+                onChange={(e) => setArea(e.target.value)}
+                className="w-full ring-1 px-2 py-2 placeholder:text-gray-500 rounded-sm ring-gray-300"
+                placeholder="Area, Street, Sector, Village"
+              />
+              <input
+                type="text"
+                value={landmark}
+                onChange={(e) => setLandmark(e.target.value)}
+                className="w-full ring-1 px-2 py-2 placeholder:text-gray-500 rounded-sm ring-gray-300"
+                placeholder="Landmark"
+              />
+            </div>
             <div className="p-2">
               <input
                 type="email"
@@ -115,14 +180,30 @@ const PlaceOrder = () => {
                 placeholder="Email(optional)"
               />
             </div>
-            <div className="p-2">
-              <textarea
-                cols="30"
-                rows="2"
-                onChange={(e) => setAddress(e.target.value)}
-                placeholder="Address"
+            <div className="flex flex-col md:flex-row gap-4 p-2">
+              <input
+                type="text"
+                value={town}
+                onChange={(e) => setTown(e.target.value)}
                 className="w-full ring-1 px-2 py-2 placeholder:text-gray-500 rounded-sm ring-gray-300"
-              ></textarea>
+                placeholder="Town/City"
+              />
+              {/* <input
+                type="number"
+                value={pincode}
+                onChange={(e) => setPincode(e.target.value)}
+                className="w-full ring-1 px-2 py-2 placeholder:text-gray-500 rounded-sm ring-gray-300"
+                placeholder="Landmark"
+              /> */}
+
+              <select
+                className="w-full ring-1 px-2 py-2 rounded-sm ring-gray-300"
+                onChange={(e) => setState(e.target.value)}
+              >
+                {states.map((state) => (
+                  <option value={state}>{state}</option>
+                ))}
+              </select>
             </div>
             <div>
               {error && (

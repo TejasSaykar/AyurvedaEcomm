@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import Layout from "../components/Layout";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { message } from "antd";
 
 const Register = () => {
-  const [message, setMessage] = useState("");
+  // const [Message, setMessage] = useState("");
   const [error, setError] = useState("");
   const [inputs, setInputs] = useState({
     username: "",
@@ -22,6 +23,7 @@ const Register = () => {
       );
       if (data) {
         navigate("/login");
+        message.success("Register Succssfully")
       }
     } catch (error) {
       console.log(error.response.data.message);
@@ -77,17 +79,20 @@ const Register = () => {
                 className="ring-1 rounded-sm px-1 py-2 ring-gray-300"
               />
             </div>
-            <div className="flex gap-4 items-center">
+            <div className="flex gap-4 flex-col">
               <button
                 onClick={handleSubmit}
                 className="text-white font-bold bg-[#12372A] px-3 py-2 rounded-md"
               >
                 Register
               </button>
+              <span className="text-center text-blue-600">
+                Already have account?{" "}
+                <Link className="text-center underline" to={"/login"}>
+                  Login
+                </Link>
+              </span>
               {error && <h2 className="font-medium text-red-600">{error}</h2>}
-              {message && (
-                <h2 className="font-medium text-green-600">"Message"</h2>
-              )}
             </div>
           </div>
         </div>

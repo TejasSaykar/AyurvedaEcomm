@@ -252,9 +252,9 @@ const SignIn = () => {
                     onClick={handleSubmit}
                     className="w-full cursor-pointer rounded-lg border border-primary bg-primary p-4 text-white transition hover:bg-opacity-90"
                   />
-                  <div>
+                  <div className="h-6">
                     {error && (
-                      <h2 className="text-red text-center pt-4">
+                      <h2 className="text-meta-1 font-medium text-lg text-center pt-4">
                         Wrong Credentials
                       </h2>
                     )}

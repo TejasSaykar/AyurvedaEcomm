@@ -13,8 +13,8 @@ const ECommerce = () => {
   // console.log('Blogs', blogs);
 
   const fetchProducts = async () => {
-    setLoading(true);
     try {
+      setLoading(true);
       const res = await axios.get(`${apiUrl}/api/product/all-products`);
       if (res.data) {
         setProducts(res.data.product);
@@ -28,11 +28,6 @@ const ECommerce = () => {
   useEffect(() => {
     fetchProducts();
   }, []);
-
-  if (loading) {
-    <h2 className="text-2xl text-center">Loading...</h2>;
-    return;
-  }
 
   return (
     <>
@@ -50,12 +45,15 @@ const ECommerce = () => {
             </button>
           )}
         </div>
-        {products.length < 1 ? (
+        {loading ? (
           <h1 className="w-full text-center font-bold text-2xl pt-20">
-            No products to preview
+            Loading...
           </h1>
         ) : (
-          <h2>Total {products.length} Products Available</h2>
+          <h2 className="text-lg pb-5 font-medium">
+            {products.length > 0 ? 'Total' : 'No'}{' '}
+            {products.length > 0 && products.length} Products Available
+          </h2>
         )}
 
         {!localStorage.getItem('isAdmin') && (
@@ -66,39 +64,41 @@ const ECommerce = () => {
           </div>
         )}
 
-        <div
-          className={`grid grid-cols-2 rounded-sm bg-gray-2 dark:bg-meta-4 sm:${
-            localStorage.getItem('isAdmin') ? 'grid-cols-5' : 'grid-cols-4'
-          }`}
-        >
-          <div className="hidden sm:block p-2.5 xl:p-5">
-            <h5 className="text-sm font-medium uppercase xsm:text-base">
-              Image
-            </h5>
-          </div>
-          <div className="p-2.5 text-center xl:p-5">
-            <h5 className="text-sm font-medium uppercase xsm:text-base">
-              Title
-            </h5>
-          </div>
-          <div className="p-2.5 text-center xl:p-5">
-            <h5 className="text-sm font-medium uppercase xsm:text-base">
-              Quantity
-            </h5>
-          </div>
-          <div className="p-2.5 hidden md:block text-center xl:p-5">
-            <h5 className="text-sm font-medium uppercase xsm:text-base">
-              Is Combo
-            </h5>
-          </div>
-          {localStorage.getItem('isAdmin') && (
-            <div className="hidden p-2.5 text-center sm:block xl:p-5">
+        {products.length > 0 && (
+          <div
+            className={`grid grid-cols-2 rounded-sm bg-gray-2 dark:bg-meta-4 sm:${
+              localStorage.getItem('isAdmin') ? 'grid-cols-5' : 'grid-cols-4'
+            }`}
+          >
+            <div className="hidden sm:block p-2.5 xl:p-5">
               <h5 className="text-sm font-medium uppercase xsm:text-base">
-                Action
+                Image
               </h5>
             </div>
-          )}
-        </div>
+            <div className="p-2.5 text-center xl:p-5">
+              <h5 className="text-sm font-medium uppercase xsm:text-base">
+                Title
+              </h5>
+            </div>
+            <div className="p-2.5 text-center xl:p-5">
+              <h5 className="text-sm font-medium uppercase xsm:text-base">
+                Quantity
+              </h5>
+            </div>
+            <div className="p-2.5 hidden md:block text-center xl:p-5">
+              <h5 className="text-sm font-medium uppercase xsm:text-base">
+                Is Combo
+              </h5>
+            </div>
+            {localStorage.getItem('isAdmin') && (
+              <div className="hidden p-2.5 text-center sm:block xl:p-5">
+                <h5 className="text-sm font-medium uppercase xsm:text-base">
+                  Action
+                </h5>
+              </div>
+            )}
+          </div>
+        )}
         {products.length > 0 &&
           products.map((items, index) => (
             <CardOne1

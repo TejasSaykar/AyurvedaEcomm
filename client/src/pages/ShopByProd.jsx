@@ -11,15 +11,23 @@ const ShopByProd = () => {
   const { slug } = useParams();
 
   const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const fetchProduct = async () => {
-      const { data } = await axios.get(
-        `${import.meta.env.VITE_BASE_URL}/api/product/find-by-product/${slug}`
-      );
-      if (data) {
-        // console.log("Product Category : ", data);
-        setProducts(data.products);
+      try {
+        setLoading(true);
+        const { data } = await axios.get(
+          `${import.meta.env.VITE_BASE_URL}/api/product/find-by-product/${slug}`
+        );
+        if (data) {
+          // console.log("Product Category : ", data);
+          setProducts(data.products);
+          setLoading(false);
+        }
+      } catch (error) {
+        console.log(error);
+        setLoading(false);
       }
     };
     fetchProduct();
@@ -28,14 +36,14 @@ const ShopByProd = () => {
   return (
     <Layout>
       <div className="bg-white pb-5 pt-10">
-        {products.length === 0 ? (
-          <h2 className="text-center text-xl font-semibold">
-            No products available
-          </h2>
+        {loading ? (
+          <h2 className="text-center text-xl font-semibold">Loading...</h2>
         ) : (
           <h2 className="text-center text-xl font-semibold">
-            {products.length} {products.length < 2 ? "product" : "products"}{" "}
-            found
+            {/* {products.length > 0 ? products.length : "No"}{" "}
+            {products.length < 2 ? "product" : "products"} found */}
+            {products.length < 1 && "No"} {location.pathname.split("/")[2]}{" "}
+            {/* {products.length < 1 ? "products" : "product"} */}
           </h2>
         )}
       </div>

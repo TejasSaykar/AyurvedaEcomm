@@ -33,9 +33,7 @@ const CardOne = ({ item, type, fetchProducts }) => {
     <div className="rounded-sm w-[100%] mx-auto border border-stroke bg-white px-5 pt-6 pb-2.5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1">
       <div className="flex flex-col">
         <div
-          className={`grid grid-cols-2 md:${
-            localStorage.getItem('isAdmin') ? 'grid-cols-5' : 'grid-cols-4'
-          } border-b border-stroke dark:border-strokedark sm:grid-cols-4`}
+          className={`grid grid-cols-2 md:grid-cols-5 border-b border-stroke dark:border-strokedark sm:grid-cols-4`}
         >
           <div className="hidden sm:flex items-center gap-3 p-2.5 xl:p-5">
             <div className="flex-shrink-0">

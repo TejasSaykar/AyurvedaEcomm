@@ -8,13 +8,21 @@ const EditNews = () => {
   const navigate = useNavigate();
 
   const [categories, setCategories] = useState([]);
+  const [loading, setLoading] = useState(false);
   //   console.log('News', news);
 
   const fetchCategories = async () => {
-    const res = await axios.get(`${apiUrl}/api/category/get-categories`);
-    if (res.data) {
-      setCategories(res.data.categories);
-      console.log('Cats : ', res.data);
+    try {
+      setLoading(true);
+      const res = await axios.get(`${apiUrl}/api/category/get-categories`);
+      if (res.data) {
+        setCategories(res.data.categories);
+        // console.log('Cats : ', res.data);
+        setLoading(false);
+      }
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
     }
   };
   useEffect(() => {
@@ -36,34 +44,41 @@ const EditNews = () => {
             </button>
           </div>
 
-          {categories.length < 1 && (
+          {loading ? (
             <h1 className="text-2xl w-full font-bold text-center pt-20">
-              No Categoties to preview
+              Loading...
+            </h1>
+          ) : (
+            <h1 className="text-lg w-full font-bold text-center pb-5">
+              {categories.length > 1 ? 'Total' : 'No'} {categories.length > 0 && categories.length}{' '}
+              {categories.length > 1 ? ' Categories' : 'Category'} available
             </h1>
           )}
 
-          <div className="grid grid-cols-2 rounded-sm bg-gray-2 dark:bg-meta-4 sm:grid-cols-3">
-            {/* <div className="hidden sm:block p-2.5 xl:p-5">
+          {categories.length > 0 && (
+            <div className="grid grid-cols-2 rounded-sm bg-gray-2 dark:bg-meta-4 sm:grid-cols-3">
+              {/* <div className="hidden sm:block p-2.5 xl:p-5">
             <h5 className="text-sm font-medium uppercase xsm:text-base">
               Image
             </h5>
           </div> */}
-            <div className="p-2.5 text-center xl:p-5">
-              <h5 className="text-sm font-medium uppercase xsm:text-base">
-                Title
-              </h5>
+              <div className="p-2.5 text-center xl:p-5">
+                <h5 className="text-sm font-medium uppercase xsm:text-base">
+                  Title
+                </h5>
+              </div>
+              <div className="p-2.5 text-center xl:p-5">
+                <h5 className="text-sm font-medium uppercase xsm:text-base">
+                  Image
+                </h5>
+              </div>
+              <div className="hidden p-2.5 text-center sm:block xl:p-5">
+                <h5 className="text-sm font-medium uppercase xsm:text-base">
+                  Action
+                </h5>
+              </div>
             </div>
-            <div className="p-2.5 text-center xl:p-5">
-              <h5 className="text-sm font-medium uppercase xsm:text-base">
-                Image
-              </h5>
-            </div>
-            <div className="hidden p-2.5 text-center sm:block xl:p-5">
-              <h5 className="text-sm font-medium uppercase xsm:text-base">
-                Action
-              </h5>
-            </div>
-          </div>
+          )}
 
           {categories.length > 0 &&
             categories.map((items, i) => (

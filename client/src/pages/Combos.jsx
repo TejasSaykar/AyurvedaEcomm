@@ -1,26 +1,32 @@
 import React from "react";
 import Layout from "../components/Layout";
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import axios from "axios";
 import { IoIosStar } from "react-icons/io";
 import { IoIosStarHalf } from "react-icons/io";
 
 const Combos = () => {
   const [combos, setCombos] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  const location = useLocation();
 
   useEffect(() => {
     const fetchCombos = async () => {
       try {
+        setLoading(true);
         const { data } = await axios.get(
           `${import.meta.env.VITE_BASE_URL}/api/product/combos`
         );
         if (data) {
           console.log("Combo Data :", data);
           setCombos(data.products);
+          setLoading(false);
         }
       } catch (error) {
         console.log(error);
+        setLoading(false);
       }
     };
     fetchCombos();
@@ -29,14 +35,13 @@ const Combos = () => {
   return (
     <Layout>
       <div className="bg-white pb-5 pt-10">
-        {combos.length === 0 ? (
-          <h2 className="text-center text-xl font-semibold">
-            No combos with this category
-          </h2>
+        {loading ? (
+          <h2 className="text-center text-xl font-semibold">Loading...</h2>
         ) : (
           <h2 className="text-center text-xl font-semibold">
-            {combos.length} Combo {combos.length < 2 ? "Product" : "Products"}{" "}
-            Available
+            {/* {combos.length > 0 ? combos.length : "No"} Combo{" "}
+            {combos.length < 2 ? "Product" : "Products"} Available */}
+            {location.pathname.split("/")}
           </h2>
         )}
       </div>

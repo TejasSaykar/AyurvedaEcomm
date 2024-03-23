@@ -3,10 +3,11 @@ import Layout from "../components/Layout";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { login } from "../store/authSlice";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { message } from "antd";
 
 const Login = () => {
-  const [message, setMessage] = useState("");
+  // const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -26,9 +27,10 @@ const Login = () => {
         { ...inputs }
       );
       if (data) {
-        console.log("Login Data : ", data);
+        // console.log("Login Data : ", data);
         dispatch(login(data));
         navigate("/");
+        message.success("Login Successfully");
       }
     } catch (error) {
       console.log(error.response.data.message);
@@ -71,20 +73,21 @@ const Login = () => {
                 className="ring-1 rounded-sm px-1 py-2 ring-gray-300"
               />
             </div>
-            <div className="flex gap-4 items-center">
+            <div className="flex gap-2 flex-col">
               <button
                 onClick={handleSubmit}
-                className="text-white font-bold bg-[#12372A] px-3 py-2 rounded-md"
+                className="text-white items-start font-bold bg-[#12372A] px-3 py-2 rounded-md"
               >
                 Login
               </button>
-              {error && <h2 className="font-medium text-red-600">{error}</h2>}
-              {message && (
-                <h2 className="font-medium text-green-600">
-                  Login Successfully
-                </h2>
-              )}
+              <span className="text-blue-600 text-center">
+                Don't have account?{" "}
+                <Link className="underline" to={"/register"}>
+                  Register
+                </Link>
+              </span>
             </div>
+            {error && <h2 className="font-medium text-red-600">{error}</h2>}
           </div>
         </div>
       </div>

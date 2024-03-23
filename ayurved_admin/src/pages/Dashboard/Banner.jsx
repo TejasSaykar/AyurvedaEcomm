@@ -5,19 +5,23 @@ import { useNavigate } from 'react-router-dom';
 
 const Banner = () => {
   const [banners, setBanners] = useState([]);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const fetchBanners = async () => {
     try {
+      setLoading(true);
       const { data } = await axios.get(
         `${import.meta.env.VITE_BASE_URL}/banner/get-banners`,
       );
       if (data) {
         // console.log('Banner Data : ', data);
         setBanners(data.banners);
+        setLoading(false);
       }
     } catch (error) {
       console.log(error);
+      setLoading(false);
     }
   };
 
@@ -52,9 +56,16 @@ const Banner = () => {
           Upload Banner Image
         </button>
       </div>
-      {banners.length < 0 && (
+      {loading ? (
         <div>
-          <h2 className="text-center pt-20 text-2xl">No Banners to Preview</h2>
+          <h2 className="text-center pt-20 text-2xl">Loading....</h2>
+        </div>
+      ) : (
+        <div>
+          <h2 className="text-center text-2xl pb-5">
+            {banners.length > 0 ? 'Total' : 'No'} {banners.length > 0 && banners.length}{' '}
+            {banners.length > 1 ? 'banners' : 'banner'} to preview
+          </h2>
         </div>
       )}
       {banners.length > 0 && (

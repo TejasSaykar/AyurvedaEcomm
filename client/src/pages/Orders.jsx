@@ -34,21 +34,21 @@ const Orders = () => {
   return (
     <Layout>
       <div className="w-full pb-6 pt-10 bg-[#FBFADA]">
-        {order.length === 0 && (
+        {loading ? (
           <div className="py-10">
+            <h2 className="text-2xl text-center font-semibold">Loading</h2>
+          </div>
+        ) : (
+          <div className="py-5">
             <h2 className="text-2xl text-center font-semibold">
-              No Orders Available !
+              {order.length > 0 ? order.length : "No"}{" "}
+              {order.length < 2 ? "Order" : "Orders"} Available
             </h2>
           </div>
         )}
         {order.length > 0 && (
           <div className="rounded-sm w-[80%] shadow-xl mx-auto border border-stroke bg-white px-5 pt-6 pb-2.5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1">
             <div className="flex flex-col">
-              {loading && (
-                <h2 className="text-center font-medium text-3xl py-5">
-                  Loading...
-                </h2>
-              )}
               <div className="grid grid-cols-2  rounded-sm bg-[#1a4d3b] text-white sm:grid-cols-4">
                 <div className="p-2.5 text-center xl:p-5">
                   <h5 className="text-sm font-medium uppercase xsm:text-base">
@@ -83,7 +83,7 @@ const Orders = () => {
                   </div>
 
                   <div className="flex items-center justify-center p-2.5 xl:p-5">
-                    <p className="text-meta-3">{item?.flatNo}</p>
+                    <p className="text-meta-3">{item?.area}</p>
                   </div>
 
                   <div className="scroll-container1 hidden sm:flex overflow-scroll items-center gap-3 p-2.5 xl:p-5">
