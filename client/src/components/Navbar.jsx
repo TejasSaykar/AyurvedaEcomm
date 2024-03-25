@@ -72,17 +72,20 @@ const Navbar = () => {
   const handleSearch = async (e) => {
     e.preventDefault();
     try {
+      setSearch({ ...search, loading: true });
       const { data } = await axios.post(
         `${import.meta.env.VITE_BASE_URL}/api/product/search/${search.keyword}`
       );
       if (data) {
         // console.log("Search Data : ", data.products);
-        setSearch({ ...search, result: data.products });
+        setSearch({ ...search, result: data.products, loading: false });
         searchRef.current.value = "";
         navigate("/search");
+        // setSearch({ ...search, loading: false });
       }
     } catch (error) {
       console.log(error);
+      setSearch({ ...search, loading: false });
     }
   };
 
@@ -357,7 +360,7 @@ const Navbar = () => {
                           <div key={item._id} className="flex gap-2 mt-4">
                             <div className="relative p-2">
                               <img
-                                src={`http://localhost:8181/images/${item.image}`}
+                                src={`https://brahmand.online:8181/images/${item.image}`}
                                 className="h-32 w-32 object-cover bg-cover"
                                 alt=""
                               />

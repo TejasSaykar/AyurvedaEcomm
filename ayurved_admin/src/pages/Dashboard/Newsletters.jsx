@@ -37,7 +37,8 @@ const Newsletters = () => {
       ) : (
         <div>
           <h1 className="text-2xl w-full font-bold text-center pb-3">
-            {newsletters.length > 0 ? 'Total' : 'No'} {newsletters.length > 0 && newsletters.length}{' '}
+            {newsletters.length > 0 ? 'Total' : 'No'}{' '}
+            {newsletters.length > 0 && newsletters.length}{' '}
             {newsletters.length > 1 ? 'newsletters' : 'newsletter'} to preview
           </h1>
         </div>
@@ -102,7 +103,7 @@ const Newsletters = () => {
             <div className="flex-shrink-0 flex gap-1 py-2 scroll-container overflow-x-scroll w-[150px] md:w-[200px]">
               {order?.products?.map((product) => (
                 <img
-                  src={`http://localhost:8181/images/${product?.image}`}
+                  src={`https://brahmand.online:8181/images/${product?.image}`}
                   className="h-10 w-10 rounded-full object-cover bg-cover"
                   alt="Brand"
                 />

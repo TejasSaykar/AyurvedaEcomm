@@ -10,14 +10,12 @@ const SearchResult = () => {
   return (
     <Layout>
       <div className="bg-white pb-5 pt-10">
-        {search.result.length === 0 ? (
-          <h2 className="text-center text-xl font-semibold">
-            No products found
-          </h2>
+        {search.loading ? (
+          <h2 className="text-center text-xl font-semibold">Loading...</h2>
         ) : (
           <h2 className="text-center text-xl font-semibold">
-            {search.result.length}{" "}
-            {search.result.length < 2 ? "product" : "Products"} found
+            {search.result.length > 0 ? search.result.length : "No"}{" "}
+            {search.result.length < 2 ? "product" : "products"} found
           </h2>
         )}
       </div>
@@ -36,7 +34,7 @@ const SearchResult = () => {
               )}
               <div className="">
                 <img
-                  src={`http://localhost:8181/images/${item.image}`}
+                  src={`https://brahmand.online:8181/images/${item.image}`}
                   className="aspect-square object-cover"
                   alt=""
                 />

@@ -62,7 +62,7 @@ const ShopByProd = () => {
               )}
               <div className="">
                 <img
-                  src={`http://localhost:8181/images/${item.image}`}
+                  src={`https://brahmand.online:8181/images/${item.image}`}
                   className="aspect-square object-cover"
                   alt=""
                 />

@@ -36,7 +36,7 @@ const Orders = () => {
       <div className="w-full pb-6 pt-10 bg-[#FBFADA]">
         {loading ? (
           <div className="py-10">
-            <h2 className="text-2xl text-center font-semibold">Loading</h2>
+            <h2 className="text-2xl text-center font-semibold">Loading...</h2>
           </div>
         ) : (
           <div className="py-5">
@@ -60,7 +60,7 @@ const Orders = () => {
                     Buyer Name
                   </h5>
                 </div>
-                <div className="p-2.5 text-center xl:p-5">
+                <div className="p-2.5 hidden md:block text-center xl:p-5">
                   <h5 className="text-sm font-medium uppercase xsm:text-base">
                     Address
                   </h5>
@@ -82,7 +82,7 @@ const Orders = () => {
                     <p className="text-meta-3">{item?.fullname}</p>
                   </div>
 
-                  <div className="flex items-center justify-center p-2.5 xl:p-5">
+                  <div className="md:flex hidden  items-center justify-center p-2.5 xl:p-5">
                     <p className="text-meta-3">{item?.area}</p>
                   </div>
 
@@ -90,7 +90,7 @@ const Orders = () => {
                     {item?.products?.map((p) => (
                       <div className="flex-shrink-0">
                         <img
-                          src={`http://localhost:8181/images/${p?.image}`}
+                          src={`https://brahmand.online:8181/images/${p?.image}`}
                           className="h-12 w-12 rounded-full object-cover bg-cover"
                           alt="Brand"
                         />

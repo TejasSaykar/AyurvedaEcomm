@@ -5,9 +5,11 @@ const SearchContext = createContext();
 const SearchProvider = ({ children }) => {
   const [search, setSearch] = useState({
     keyword: "",
+    loading: false,
     result: [],
   });
 
+  console.log("Context : ", search.result);
 
   return (
     <SearchContext.Provider value={[search, setSearch]}>
