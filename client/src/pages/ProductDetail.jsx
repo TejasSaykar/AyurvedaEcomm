@@ -82,7 +82,7 @@ const ProductDetail = () => {
                 />
               )}
             </div>
-            <div className="left flex ml-16 mt-2 w-[200px]">
+            <div className="left flex md:ml-16 mt-2 items-center w-[60px] sm:w-[120px] md:w-[100px] lg:w-[160px] 2xl:w-[200px]">
               <img
                 src={`https://brahmand.online:8181/images/${product.image1}`}
                 onClick={() => setImage(product.image1)}
