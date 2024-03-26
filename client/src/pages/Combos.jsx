@@ -72,7 +72,7 @@ const Combos = () => {
                 )}
                 <div className="bg hover:mix-blend-normal">
                   <img
-                    src={`http://localhost:8181/images/${item.image1}`}
+                    src={`https://brahmand.online:8181/images/${item.image1}`}
                     className="aspect-square object-cover"
                     alt=""
                   />

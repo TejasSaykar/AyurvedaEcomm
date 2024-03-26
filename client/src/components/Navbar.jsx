@@ -360,7 +360,7 @@ const Navbar = () => {
                           <div key={item._id} className="flex gap-2 mt-4">
                             <div className="relative p-2">
                               <img
-                                src={`http://localhost:8181/images/${item.image1}`}
+                                src={`https://brahmand.online:8181/images/${item.image1}`}
                                 className="h-32 w-32 object-cover bg-cover"
                                 alt=""
                               />

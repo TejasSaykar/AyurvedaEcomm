@@ -70,13 +70,13 @@ const ProductDetail = () => {
             <div className="left w-full">
               {image ? (
                 <img
-                  src={`http://localhost:8181/images/${image}`}
+                  src={`https://brahmand.online:8181/images/${image}`}
                   className="bg-gray-50 md:h-[90%] w-full border py-5 px-4 md:w-[60%] mx-auto md:aspect-square object-cover"
                   alt=""
                 />
               ) : (
                 <img
-                  src={`http://localhost:8181/images/${product.image1}`}
+                  src={`https://brahmand.online:8181/images/${product.image1}`}
                   className="bg-gray-50 md:h-[90%] w-full border py-5 px-4 md:w-[60%] mx-auto md:aspect-square object-cover"
                   alt=""
                 />
@@ -84,31 +84,31 @@ const ProductDetail = () => {
             </div>
             <div className="left flex ml-16 mt-2 w-[200px]">
               <img
-                src={`http://localhost:8181/images/${product.image1}`}
+                src={`https://brahmand.online:8181/images/${product.image1}`}
                 onClick={() => setImage(product.image1)}
                 className="bg-gray-50 md:h-[90%] w-full border py-5 cursor-pointer px-4 md:w-[60%] mx-auto md:aspect-square object-cover"
                 alt=""
               />
               <img
-                src={`http://localhost:8181/images/${product.image2}`}
+                src={`https://brahmand.online:8181/images/${product.image2}`}
                 onClick={() => setImage(product.image2)}
                 className="bg-gray-50 md:h-[90%] w-full border py-5 cursor-pointer px-4 md:w-[60%] mx-auto md:aspect-square object-cover"
                 alt=""
               />
               <img
-                src={`http://localhost:8181/images/${product.image3}`}
+                src={`https://brahmand.online:8181/images/${product.image3}`}
                 onClick={() => setImage(product.image3)}
                 className="bg-gray-50 md:h-[90%] w-full border py-5 cursor-pointer px-4 md:w-[60%] mx-auto md:aspect-square object-cover"
                 alt=""
               />
               <img
-                src={`http://localhost:8181/images/${product.image4}`}
+                src={`https://brahmand.online:8181/images/${product.image4}`}
                 onClick={() => setImage(product.image4)}
                 className="bg-gray-50 md:h-[90%] w-full border py-5 cursor-pointer px-4 md:w-[60%] mx-auto md:aspect-square object-cover"
                 alt=""
               />
               <img
-                src={`http://localhost:8181/images/${product.image5}`}
+                src={`https://brahmand.online:8181/images/${product.image5}`}
                 onClick={() => setImage(product.image5)}
                 className="bg-gray-50 md:h-[90%] w-full border py-5 cursor-pointer px-4 md:w-[60%] mx-auto md:aspect-square object-cover"
                 alt=""
