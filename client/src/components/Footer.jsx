@@ -110,16 +110,13 @@ const Footer = () => {
                 </span>
               </h2>
               <h2 className="flex gap-2 items-center">
-                <IoCallOutline className="text-lg" />
-                <span className="underline font-normal md:text-sm text-lg cursor-pointer">
-                  0291 3529700
-                </span>
-              </h2>
-              <h2 className="flex gap-2 items-center">
                 <GoMail className="text-lg" />
-                <span className="underline font-normal md:text-sm text-lg cursor-pointer">
+                <a
+                  href="mailto:tejassaykar2001@gmail.com"
+                  className="underline font-normal md:text-sm text-lg cursor-pointer"
+                >
                   Email us
-                </span>
+                </a>
               </h2>
             </div>
           </div>

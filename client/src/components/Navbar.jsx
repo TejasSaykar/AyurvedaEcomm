@@ -187,16 +187,16 @@ const Navbar = () => {
               onChange={(e) =>
                 setSearch({ ...search, keyword: e.target.value })
               }
-              className="focus:outline-none col-span-10 w-full bg-transparent placeholder:text-black placeholder:text-sm"
+              className="focus:outline-none col-span-9 w-full bg-transparent placeholder:text-black placeholder:text-sm"
               placeholder="Search..."
             />
             <button
               type="submit"
               onClick={handleSearch}
-              className="text-xl bg-[#436850] text-white px-1 rounded-sm col-span-2 py-1 flex cursor-pointer w-[max-content]"
+              className="text-sm bg-[#436850] text-white px-1 rounded-sm col-span-3 py-1 flex cursor-pointer w-[max-content]"
               disabled={!search.keyword}
             >
-              <FiSearch />
+              {search.loading ? "Loading..." : "Search"}
             </button>
           </div>
         </div>
@@ -360,7 +360,7 @@ const Navbar = () => {
                           <div key={item._id} className="flex gap-2 mt-4">
                             <div className="relative p-2">
                               <img
-                                src={`https://brahmand.online:8181/images/${item.image}`}
+                                src={`http://localhost:8181/images/${item.image1}`}
                                 className="h-32 w-32 object-cover bg-cover"
                                 alt=""
                               />
@@ -434,15 +434,15 @@ const Navbar = () => {
             type="text"
             // ref={searchRef}
             onChange={(e) => setSearch({ ...search, keyword: e.target.value })}
-            className="focus:outline-none col-span-10 pl-3 sm:pl-10 placeholder:text-black placeholder:text-sm"
+            className="focus:outline-none col-span-9 pl-3 sm:pl-10 placeholder:text-black placeholder:text-sm"
             placeholder="Search..."
           />
           <button
             type="submit"
             onClick={handleSearch}
-            className="text-sm bg-[#436850] text-white px-1 rounded-sm col-span-2 py-1 flex cursor-pointer  w-[max-content]"
+            className="text-sm bg-[#436850] text-white px-1 rounded-sm col-span-3 py-1 flex cursor-pointer  w-[max-content]"
           >
-            <FiSearch />
+            {search.loading ? "Loading..." : "Search"}
           </button>
         </div>
       </div>

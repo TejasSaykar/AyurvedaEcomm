@@ -9,8 +9,6 @@ const SearchProvider = ({ children }) => {
     result: [],
   });
 
-  console.log("Context : ", search.result);
-
   return (
     <SearchContext.Provider value={[search, setSearch]}>
       {children}

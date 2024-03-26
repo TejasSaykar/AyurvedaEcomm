@@ -22,6 +22,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      setLoading(true);
       const { data } = await axios.post(
         `${import.meta.env.VITE_BASE_URL}/api/auth/login`,
         { ...inputs }
@@ -31,10 +32,12 @@ const Login = () => {
         dispatch(login(data));
         navigate("/");
         message.success("Login Successfully");
+        setLoading(false);
       }
     } catch (error) {
       console.log(error.response.data.message);
       setError(error.response.data.message);
+      setLoading(false);
       setTimeout(() => {
         setError("");
       }, 3000);
@@ -74,12 +77,21 @@ const Login = () => {
               />
             </div>
             <div className="flex gap-2 flex-col">
-              <button
-                onClick={handleSubmit}
-                className="text-white items-start font-bold bg-[#12372A] px-3 py-2 rounded-md"
-              >
-                Login
-              </button>
+              {loading ? (
+                <button
+                  disabled
+                  className="text-white animate-pulse items-start font-bold bg-[#12372A] px-3 py-2 rounded-md"
+                >
+                  Loading...
+                </button>
+              ) : (
+                <button
+                  onClick={handleSubmit}
+                  className="text-white items-start font-bold bg-[#12372A] px-3 py-2 rounded-md"
+                >
+                  Login
+                </button>
+              )}
               <span className="text-blue-600 text-center">
                 Don't have account?{" "}
                 <Link className="underline" to={"/register"}>
@@ -87,7 +99,9 @@ const Login = () => {
                 </Link>
               </span>
             </div>
-            {error && <h2 className="font-medium text-red-600">{error}</h2>}
+            {error && (
+              <h2 className="font-medium text-center text-red-600">{error}</h2>
+            )}
           </div>
         </div>
       </div>

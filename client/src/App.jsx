@@ -19,6 +19,7 @@ import ShopByProd from "./pages/ShopByProd";
 import Combos from "./pages/Combos";
 import ComboDetails from "./pages/ComboDetails";
 import SearchResult from "./pages/SearchResult";
+import Offers from "./pages/Offers";
 
 function App() {
   const location = useLocation();
@@ -71,6 +72,15 @@ function App() {
           element={
             <IsLogin>
               <PlaceOrder />
+            </IsLogin>
+          }
+        />
+
+        <Route
+          path="/offers"
+          element={
+            <IsLogin>
+              <Offers />
             </IsLogin>
           }
         />

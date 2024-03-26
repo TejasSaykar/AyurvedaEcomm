@@ -11,17 +11,23 @@ const ProductDetail = () => {
   const [quantity, setQuantity] = useState(1);
   const [product, setProduct] = useState({});
   const [message, setMessage] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [image, setImage] = useState(null);
   const { id } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const fetchSingleProd = async () => {
-    const { data } = await axios.get(
-      `${import.meta.env.VITE_BASE_URL}/api/product/single-product/${id}`
-    );
-    if (data) {
-      setProduct(data.product);
-      // console.log("Single Product : ", data);
+    try {
+      const { data } = await axios.get(
+        `${import.meta.env.VITE_BASE_URL}/api/product/single-product/${id}`
+      );
+      if (data) {
+        setProduct(data.product);
+        // console.log("Single Product : ", data);
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -58,36 +64,95 @@ const ProductDetail = () => {
 
   return (
     <Layout>
-      <div className="w-full bg-[#FBFADA]">
+      <div className="w-full bg-gray-100">
         <div className="w-full grid md:grid-cols-2 px-3 pt-10 md:px-8">
-          <div className="left w-full">
-            <img
-              src={`https://brahmand.online:8181/images/${product.image}`}
-              className="md:h-[90%] w-full border py-5 px-4 md:w-[90%] md:aspect-square object-cover"
-              alt=""
-            />
+          <div className="w-full">
+            <div className="left w-full">
+              {image ? (
+                <img
+                  src={`http://localhost:8181/images/${image}`}
+                  className="bg-gray-50 md:h-[90%] w-full border py-5 px-4 md:w-[60%] mx-auto md:aspect-square object-cover"
+                  alt=""
+                />
+              ) : (
+                <img
+                  src={`http://localhost:8181/images/${product.image1}`}
+                  className="bg-gray-50 md:h-[90%] w-full border py-5 px-4 md:w-[60%] mx-auto md:aspect-square object-cover"
+                  alt=""
+                />
+              )}
+            </div>
+            <div className="left flex ml-16 mt-2 w-[200px]">
+              <img
+                src={`http://localhost:8181/images/${product.image1}`}
+                onClick={() => setImage(product.image1)}
+                className="bg-gray-50 md:h-[90%] w-full border py-5 cursor-pointer px-4 md:w-[60%] mx-auto md:aspect-square object-cover"
+                alt=""
+              />
+              <img
+                src={`http://localhost:8181/images/${product.image2}`}
+                onClick={() => setImage(product.image2)}
+                className="bg-gray-50 md:h-[90%] w-full border py-5 cursor-pointer px-4 md:w-[60%] mx-auto md:aspect-square object-cover"
+                alt=""
+              />
+              <img
+                src={`http://localhost:8181/images/${product.image3}`}
+                onClick={() => setImage(product.image3)}
+                className="bg-gray-50 md:h-[90%] w-full border py-5 cursor-pointer px-4 md:w-[60%] mx-auto md:aspect-square object-cover"
+                alt=""
+              />
+              <img
+                src={`http://localhost:8181/images/${product.image4}`}
+                onClick={() => setImage(product.image4)}
+                className="bg-gray-50 md:h-[90%] w-full border py-5 cursor-pointer px-4 md:w-[60%] mx-auto md:aspect-square object-cover"
+                alt=""
+              />
+              <img
+                src={`http://localhost:8181/images/${product.image5}`}
+                onClick={() => setImage(product.image5)}
+                className="bg-gray-50 md:h-[90%] w-full border py-5 cursor-pointer px-4 md:w-[60%] mx-auto md:aspect-square object-cover"
+                alt=""
+              />
+            </div>
           </div>
-          <div className="right w-full flex flex-col items-center">
+          <div className="right w-full flex flex-col px-10">
             <div className="flex flex-col gap-5">
               <h2 className="text-3xl mt-3 font-semibold">{product.title}</h2>
-              <p className="text-xl font-medium text-gray-800">
+              {/* <p className="text-xl font-medium text-gray-800">
                 {product.desc}
-              </p>
+              </p> */}
+              <div dangerouslySetInnerHTML={{ __html: product.desc }}></div>
               <div className="">
                 <h2 className="text-lg text-gray-600 pb-1">Rating</h2>
                 <div className="flex gap-2 items-center text-[#5dc23c]">
+                  <p>{product.review}</p>
                   <IoIosStar />
-                  <IoIosStar />
-                  <IoIosStar />
-                  <IoIosStar />
-                  <IoIosStarHalf />
                 </div>
               </div>
               <div className="flex flex-col gap-1">
-                <h2 className="text-[14px] font-medium">
-                  MRP (Including all taxes)
+                {product.offerPrice !== 0 && (
+                  <div className="flex gap-2 items-center">
+                    <span className="text-red-500 font-bold">
+                      {product.discountPrice}%
+                    </span>
+                    <h2>
+                      ₹
+                      <span className="font-bold text-lg">
+                        {product.offerPrice}
+                      </span>
+                    </h2>
+                  </div>
+                )}
+                <h2 className="text-[14px] flex gap-2 items-center font-medium">
+                  M.R.P.:{" "}
+                  <h4
+                    className={`text-lg font-semibold ${
+                      product.offerPrice !== 0 && "line-through"
+                    }`}
+                  >
+                    ₹{product.price}
+                  </h4>
                 </h2>
-                <h4 className="text-lg font-semibold">₹{product.price}</h4>
               </div>
               <div className="flex flex-col gap-1">
                 <h2 className="text-[14px] font-medium">Quantity</h2>

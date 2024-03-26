@@ -8,6 +8,7 @@ const CreateProduct = lazy(() => import('../pages/Form/CreateProduct'));
 
 const CreateCombo = lazy(() => import('../pages/Form/CreateCombos'));
 const UploadBanner = lazy(() => import('../pages/Form/UploadBanner'));
+const CreateOffer = lazy(() => import('../pages/Form/CreateOffer'));
 const Profile = lazy(() => import('../pages/Profile'));
 const Settings = lazy(() => import('../pages/Settings'));
 const Tables = lazy(() => import('../pages/Tables'));
@@ -44,6 +45,11 @@ const coreRoutes = [
     path: '/create-combo',
     title: 'Create Combo',
     component: CreateCombo,
+  },
+  {
+    path: '/create-offer',
+    title: 'Create Offer',
+    component: CreateOffer,
   },
   {
     path: '/settings',

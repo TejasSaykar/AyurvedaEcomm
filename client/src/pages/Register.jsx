@@ -7,6 +7,7 @@ import { message } from "antd";
 const Register = () => {
   // const [Message, setMessage] = useState("");
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
   const [inputs, setInputs] = useState({
     username: "",
     email: "",
@@ -16,18 +17,28 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!inputs.username || inputs.email || !inputs.password) {
+      setError("All fields are required!");
+      setTimeout(() => {
+        setError("");
+      }, 3000);
+      return;
+    }
     try {
+      setLoading(true);
       const { data } = await axios.post(
         `${import.meta.env.VITE_BASE_URL}/api/auth/register`,
         { ...inputs }
       );
       if (data) {
         navigate("/login");
-        message.success("Register Succssfully")
+        message.success("Register Succssfully");
+        setLoading(false);
       }
     } catch (error) {
       console.log(error.response.data.message);
       setError(error.response.data.message);
+      setLoading(false);
       setTimeout(() => {
         setError("");
       }, 3000);
@@ -80,19 +91,32 @@ const Register = () => {
               />
             </div>
             <div className="flex gap-4 flex-col">
-              <button
-                onClick={handleSubmit}
-                className="text-white font-bold bg-[#12372A] px-3 py-2 rounded-md"
-              >
-                Register
-              </button>
+              {loading ? (
+                <button
+                  disabled
+                  className="text-white animate-pulse font-bold bg-[#12372A] px-3 py-2 rounded-md"
+                >
+                  Loading...
+                </button>
+              ) : (
+                <button
+                  onClick={handleSubmit}
+                  className="text-white font-bold bg-[#12372A] px-3 py-2 rounded-md"
+                >
+                  Register
+                </button>
+              )}
               <span className="text-center text-blue-600">
                 Already have account?{" "}
                 <Link className="text-center underline" to={"/login"}>
                   Login
                 </Link>
               </span>
-              {error && <h2 className="font-medium text-red-600">{error}</h2>}
+              {error && (
+                <h2 className="font-medium text-center text-red-600">
+                  {error}
+                </h2>
+              )}
             </div>
           </div>
         </div>

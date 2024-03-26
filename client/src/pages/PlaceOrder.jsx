@@ -58,6 +58,7 @@ const PlaceOrder = () => {
   const [town, setTown] = useState("");
   const [state, setState] = useState("");
   const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const { products } = useSelector((state) => state.cart);
   const { user } = useSelector((state) => state.auth);
@@ -84,9 +85,11 @@ const PlaceOrder = () => {
       setTimeout(() => {
         setError(false);
       }, 3000);
+      message.error("All fields are required!");
       return;
     }
     try {
+      setLoading(true);
       const { data } = await axios.post(
         `${import.meta.env.VITE_BASE_URL}/api/auth/order`,
         {
@@ -109,9 +112,11 @@ const PlaceOrder = () => {
         dispatch(emptyCart());
         navigate("/orders");
         message.success("Order Placed");
+        setLoading(false);
       }
     } catch (error) {
       console.log(error.response.data.message);
+      setLoading(false);
     }
   };
 
@@ -205,13 +210,13 @@ const PlaceOrder = () => {
                 ))}
               </select>
             </div>
-            <div>
+            {/* <div>
               {error && (
                 <h2 className="text-lg font-semibold text-red-500 text-center">
                   All fields are required
                 </h2>
               )}
-            </div>
+            </div> */}
           </div>
           <div className="w-full p-4 bg-pink-200/10">
             <h2 className="text-xl font-semibold">Order</h2>
@@ -237,7 +242,7 @@ const PlaceOrder = () => {
                         >
                           <div className="p-2">
                             <img
-                              src={`https://brahmand.online:8181/images/${item.image}`}
+                              src={`http://localhost:8181/images/${item.image1}`}
                               className="h-32 w-32 object-cover bg-cover"
                               alt=""
                             />
@@ -289,12 +294,21 @@ const PlaceOrder = () => {
                         <h2>Subtotal</h2>
                         <h4 className="text-lg font-semibold">₹{total}</h4>
                       </div>
-                      <button
-                        onClick={handleOrder}
-                        className="bg-orange-500 w-full mt-5 py-3 rounded-full text-white font-semibold text-lg"
-                      >
-                        Place Order
-                      </button>
+                      {loading ? (
+                        <button
+                          disabled
+                          className="bg-orange-500 animate-pulse w-full mt-5 py-3 rounded-full text-white font-semibold text-lg"
+                        >
+                          Loading...
+                        </button>
+                      ) : (
+                        <button
+                          onClick={handleOrder}
+                          className="bg-orange-500 w-full mt-5 py-3 rounded-full text-white font-semibold text-lg"
+                        >
+                          Place Order
+                        </button>
+                      )}
                     </div>
                   </div>
                 )}

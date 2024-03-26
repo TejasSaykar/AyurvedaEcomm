@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import Breadcrumb from '../../components/Breadcrumb';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
+import JoditEditor from 'jodit-react';
+import { useRef } from 'react';
 
 const UpdateBlog = () => {
   const navigate = useNavigate();
@@ -16,6 +18,8 @@ const UpdateBlog = () => {
     quantity: '',
     file: '',
   });
+
+  const editor = useRef(null);
 
   const [categories, setCategories] = useState([]);
 
@@ -184,13 +188,21 @@ const UpdateBlog = () => {
                     <label className="mb-2.5 block text-black dark:text-white">
                       Description
                     </label>
-                    <textarea
+                    {/* <textarea
                       placeholder="Enter description"
                       value={input.desc}
                       onChange={(e) =>
                         setInput({ ...input, desc: e.target.value })
                       }
                       className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                    /> */}
+
+                    <JoditEditor
+                      ref={editor}
+                      value={input.desc}
+                      onChange={(content) =>
+                        setInput({ ...input, desc: content })
+                      }
                     />
                   </div>
 

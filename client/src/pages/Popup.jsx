@@ -7,6 +7,7 @@ const Popup = ({ setPopup }) => {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const popupShown = localStorage.getItem("popupShown");
@@ -26,6 +27,7 @@ const Popup = ({ setPopup }) => {
       return;
     }
     try {
+      setLoading(true);
       const { data } = await axios.post(
         `${import.meta.env.VITE_BASE_URL}/api/auth/popup`,
         {
@@ -37,6 +39,7 @@ const Popup = ({ setPopup }) => {
         console.log("Popup Data : ", data);
         setEmail("");
         setPhone("");
+        setLoading(false);
       }
       setPopup(false);
       setShowPopup(false);
@@ -44,6 +47,7 @@ const Popup = ({ setPopup }) => {
       document.body.style.overflow = "auto";
     } catch (error) {
       console.log(error);
+      setLoading(false);
     }
   };
 
@@ -100,9 +104,15 @@ const Popup = ({ setPopup }) => {
                 />
               </div>
               <div className="flex gap-3 items-center">
-                <button className="bg-[#12372A] px-4 py-2 rounded-sm font-semibold">
-                  Submit
-                </button>
+                {loading ? (
+                  <button className="bg-[#12372A] animate-pulse px-4 py-2 rounded-sm font-semibold">
+                    Loading...
+                  </button>
+                ) : (
+                  <button className="bg-[#12372A] px-4 py-2 rounded-sm font-semibold">
+                    Submit
+                  </button>
+                )}
                 <div>
                   {error && (
                     <h2 className="text-base font-bold text-red-400">

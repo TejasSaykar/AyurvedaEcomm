@@ -16,6 +16,7 @@ import Combos from './pages/Dashboard/Combos';
 import CreateCombos from './pages/Form/CreateCombos';
 import PopupData from './pages/Dashboard/PopupData';
 import Newsletters from './pages/Dashboard/Newsletters';
+import Offers from './pages/Dashboard/Offers';
 
 const DefaultLayout = lazy(() => import('./layout/DefaultLayout'));
 
@@ -98,6 +99,14 @@ function App() {
             element={
               <IsAdmin>
                 <Newsletters />
+              </IsAdmin>
+            }
+          />
+          <Route
+            path="/offers"
+            element={
+              <IsAdmin>
+                <Offers />
               </IsAdmin>
             }
           />

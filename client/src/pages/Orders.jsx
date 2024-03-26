@@ -33,7 +33,7 @@ const Orders = () => {
 
   return (
     <Layout>
-      <div className="w-full pb-6 pt-10 bg-[#FBFADA]">
+      <div className="w-full pb-6 pt-10 bg-gray-100">
         {loading ? (
           <div className="py-10">
             <h2 className="text-2xl text-center font-semibold">Loading...</h2>
@@ -90,7 +90,7 @@ const Orders = () => {
                     {item?.products?.map((p) => (
                       <div className="flex-shrink-0">
                         <img
-                          src={`https://brahmand.online:8181/images/${p?.image}`}
+                          src={`http://localhost:8181/images/${p?.image1}`}
                           className="h-12 w-12 rounded-full object-cover bg-cover"
                           alt="Brand"
                         />

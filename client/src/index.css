@@ -6,6 +6,10 @@
   transition: 0.5s all ease;
 }
 
+.bg{
+  mix-blend-mode: multiply;
+}
+
 
 /* Scrollbar Container */
 .scroll-container {
