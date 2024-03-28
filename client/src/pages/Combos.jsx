@@ -37,7 +37,7 @@ const Combos = () => {
       <div className="bg-white pb-5 pt-10">
         {loading ? (
           // <h2 className="text-center text-xl font-semibold">Loading...</h2>
-          <div className="grid  grid-cols-1 md:gap-4 space-y-4 py-10 md:space-y-0 md:grid-cols-4 px-4 md:w-[80%] mx-auto mb-8 md:mb-0">
+          <div className="grid  grid-cols-1 md:gap-4 space-y-4 py-10 md:space-y-0 md:grid-cols-3 px-4 md:w-[80%] mx-auto mb-8 md:mb-0">
             {Array(1, 2, 3, 4)?.map((item) => (
               <Link className="w-full relative -z-9 animate-pulse h-[300px] cursor-pointer flex flex-col gap-2 p-4 bg-gray-300/70 rounded-md">
                 {item.quantity == 0 && (
@@ -58,7 +58,7 @@ const Combos = () => {
       </div>
       <div className="w-full bg-white pb-10 flex">
         {!loading && (
-          <div className="grid  grid-cols-1 md:gap-4 space-y-4 md:space-y-0 md:grid-cols-4 px-4 md:w-[80%] mx-auto mb-8 md:mb-0">
+          <div className="grid  grid-cols-1 md:gap-4 space-y-4 md:space-y-0 md:grid-cols-3 px-4 md:w-[80%] mx-auto mb-8 md:mb-0">
             {combos?.map((item) => (
               <Link
                 to={`/details/${item._id}`}

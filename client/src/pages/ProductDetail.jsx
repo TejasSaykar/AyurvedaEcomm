@@ -83,39 +83,49 @@ const ProductDetail = () => {
               )}
             </div>
             <div className="left flex md:ml-16 mt-2 items-center w-[60px] sm:w-[120px] md:w-[100px] lg:w-[160px] 2xl:w-[200px]">
-              <img
-                src={`https://brahmand.online:8181/images/${product.image1}`}
-                onClick={() => setImage(product.image1)}
-                className="bg-gray-50 md:h-[90%] w-full border py-5 cursor-pointer px-4 md:w-[60%] mx-auto md:aspect-square object-cover"
-                alt=""
-              />
-              <img
-                src={`https://brahmand.online:8181/images/${product.image2}`}
-                onClick={() => setImage(product.image2)}
-                className="bg-gray-50 md:h-[90%] w-full border py-5 cursor-pointer px-4 md:w-[60%] mx-auto md:aspect-square object-cover"
-                alt=""
-              />
-              <img
-                src={`https://brahmand.online:8181/images/${product.image3}`}
-                onClick={() => setImage(product.image3)}
-                className="bg-gray-50 md:h-[90%] w-full border py-5 cursor-pointer px-4 md:w-[60%] mx-auto md:aspect-square object-cover"
-                alt=""
-              />
-              <img
-                src={`https://brahmand.online:8181/images/${product.image4}`}
-                onClick={() => setImage(product.image4)}
-                className="bg-gray-50 md:h-[90%] w-full border py-5 cursor-pointer px-4 md:w-[60%] mx-auto md:aspect-square object-cover"
-                alt=""
-              />
-              <img
-                src={`https://brahmand.online:8181/images/${product.image5}`}
-                onClick={() => setImage(product.image5)}
-                className="bg-gray-50 md:h-[90%] w-full border py-5 cursor-pointer px-4 md:w-[60%] mx-auto md:aspect-square object-cover"
-                alt=""
-              />
+              {product.image1 && (
+                <img
+                  src={`https://brahmand.online:8181/images/${product.image1}`}
+                  onClick={() => setImage(product.image1)}
+                  className="bg-gray-50 md:h-[90%] w-full border py-5 cursor-pointer px-4 md:w-[60%] mx-auto md:aspect-square object-cover"
+                  alt=""
+                />
+              )}
+              {product.image2 && (
+                <img
+                  src={`https://brahmand.online:8181/images/${product.image2}`}
+                  onClick={() => setImage(product.image2)}
+                  className="bg-gray-50 md:h-[90%] w-full border py-5 cursor-pointer px-4 md:w-[60%] mx-auto md:aspect-square object-cover"
+                  alt=""
+                />
+              )}
+              {product.image3 && (
+                <img
+                  src={`https://brahmand.online:8181/images/${product.image3}`}
+                  onClick={() => setImage(product.image3)}
+                  className="bg-gray-50 md:h-[90%] w-full border py-5 cursor-pointer px-4 md:w-[60%] mx-auto md:aspect-square object-cover"
+                  alt=""
+                />
+              )}
+              {product.image4 && (
+                <img
+                  src={`https://brahmand.online:8181/images/${product.image4}`}
+                  onClick={() => setImage(product.image4)}
+                  className="bg-gray-50 md:h-[90%] w-full border py-5 cursor-pointer px-4 md:w-[60%] mx-auto md:aspect-square object-cover"
+                  alt=""
+                />
+              )}
+              {product.image5 && (
+                <img
+                  src={`https://brahmand.online:8181/images/${product.image5}`}
+                  onClick={() => setImage(product.image5)}
+                  className="bg-gray-50 md:h-[90%] w-full border py-5 cursor-pointer px-4 md:w-[60%] mx-auto md:aspect-square object-cover"
+                  alt=""
+                />
+              )}
             </div>
           </div>
-          <div className="right w-full flex flex-col px-10">
+          <div className="right w-full flex flex-col px-4 md:px-10">
             <div className="flex flex-col gap-5">
               <h2 className="text-3xl mt-3 font-semibold">{product.title}</h2>
               {/* <p className="text-xl font-medium text-gray-800">

@@ -99,7 +99,7 @@ const Combos = () => {
                 <div className="hidden md:flex items-center gap-3 p-2.5 xl:p-5">
                   <div className="flex-shrink-0 flex gap-1 py-2 scroll-container">
                     {/* <img
-                      src={`http://localhost:8181/images/${b.bannerImage}`}
+                      src={`https://brahmand.online:8181/images/${b.bannerImage}`}
                       className="md:h-14 md:w-24 h-8 w-12 object-cover bg-cover"
                       alt="Brand"
                     /> */}
@@ -110,7 +110,7 @@ const Combos = () => {
                 <div className="flex items-center gap-3 p-2.5 xl:p-5">
                   <div className="flex-shrink-0 flex gap-1 py-2 scroll-container">
                     <img
-                      src={`http://localhost:8181/images/${product.image}`}
+                      src={`https://brahmand.online:8181/images/${product.image}`}
                       className="md:h-14 md:w-24 h-8 w-12 object-cover bg-cover"
                       alt="Brand"
                     />
@@ -126,7 +126,7 @@ const Combos = () => {
                   <div className="flex-shrink-0 flex gap-1 py-2 scroll-container">
                     {comboProd?.products?.map((p) => (
                       // <img
-                      //   src={`http://localhost:8181/images/${p.image}`}
+                      //   src={`https://brahmand.online:8181/images/${p.image}`}
                       //   className="md:h-14 md:w-24 h-8 w-12 object-cover bg-cover"
                       //   alt="Brand"
                       // />

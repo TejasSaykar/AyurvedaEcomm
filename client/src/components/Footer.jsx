@@ -105,14 +105,20 @@ const Footer = () => {
             <div className="flex flex-col gap-2">
               <h2 className="flex gap-2 items-center">
                 <IoCallOutline className="text-lg" />
-                <span className="underline font-normal md:text-sm text-lg cursor-pointer">
-                  0291 3529700
+                <span className="font-normal md:text-sm text-lg cursor-pointer">
+                  +91 7083467359
+                </span>
+              </h2>
+              <h2 className="flex gap-2 items-center">
+                <IoCallOutline className="text-lg" />
+                <span className="font-normal md:text-sm text-lg cursor-pointer">
+                  +91 9175534218
                 </span>
               </h2>
               <h2 className="flex gap-2 items-center">
                 <GoMail className="text-lg" />
                 <a
-                  href="mailto:tejassaykar2001@gmail.com"
+                  href="mailto:gangagiriayurvedhealth@gmail.com"
                   className="underline font-normal md:text-sm text-lg cursor-pointer"
                 >
                   Email us
@@ -123,10 +129,15 @@ const Footer = () => {
           <div className="five flex flex-col gap-2">
             <h1 className="md:text-base text-2xl font-semibold">Follow us</h1>
             <div className="flex gap-2 text-3xl text-green-950">
-              <FaInstagram className="cursor-pointer" />
-              <FaFacebook className="cursor-pointer" />
+              <a
+                href="https://www.instagram.com/gangagiri_ayurved_health?igsh=NTl5MmNheXNzbGw5&utm_source=qr"
+                target="_blanck"
+              >
+                <FaInstagram className="cursor-pointer" />
+              </a>
+              {/* <FaFacebook className="cursor-pointer" />
               <IoLogoYoutube className="cursor-pointer" />
-              <FaXTwitter className="cursor-pointer" />
+              <FaXTwitter className="cursor-pointer" /> */}
             </div>
           </div>
         </div>

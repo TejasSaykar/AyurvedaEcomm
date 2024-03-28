@@ -10,7 +10,7 @@ const Layout = ({ children }) => {
       <header className="fixed top-0 z-10 w-full bg-white">
         <Navbar />
       </header>
-      <main className={`${location.pathname === "/" ? "mt-52" : "mt-32"}`}>
+      <main className={`${location.pathname === "/" ? "mt-56" : "mt-[8rem]"}`}>
         {children}
       </main>
       <footer>

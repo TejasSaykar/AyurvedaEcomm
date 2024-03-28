@@ -177,7 +177,7 @@ const Navbar = () => {
           </div>
         </div>
       )}
-      <div className="middle w-full grid grid-cols-2 text-center md:grid md:grid-cols-3 h-28 md:h-20 items-center p-2 md:px-10">
+      <div className="middle w-full grid grid-cols-2 text-center md:grid md:grid-cols-3 h-36 md:h-20 items-center p-2 md:px-10">
         <div className="left w-full hidden md:block">
           <div className="ring-1 grid grid-cols-12 px-5 items-center ring-gray-200 rounded-full p-1.5 md:w-[26vw] xl:w-[20vw]">
             <input
@@ -201,9 +201,13 @@ const Navbar = () => {
           </div>
         </div>
 
-        <div className="middle w-full flex justify-center">
+        <div className="middle w-full flex ml-[12%] md:justify-center">
           <Link to={"/"} className="text-3xl md:text-2xl font-semibold">
-            Ayurveda
+            <img
+              src="/img/ayurvedLogo.jpg"
+              className="w-[65px] h-[65px]"
+              alt=""
+            />
           </Link>
         </div>
         <div className="relative right w-full flex justify-end">
@@ -380,7 +384,10 @@ const Navbar = () => {
                               <div className="flex gap-2 items-center">
                                 <h2 className="text-gray-700">Price : </h2>
                                 <h4 className="text-base font-semibold">
-                                  ₹{item.price}
+                                  ₹
+                                  {item.offerPrice == 0
+                                    ? item.price
+                                    : item.offerPrice}
                                 </h4>
                               </div>
                               <div className="flex justify-between">

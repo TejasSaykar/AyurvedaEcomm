@@ -92,7 +92,7 @@ const Banner = () => {
                 <div className="flex items-center gap-3 p-2.5 xl:p-5">
                   <div className="flex-shrink-0 flex gap-1 py-2 scroll-container">
                     <img
-                      src={`http://localhost:8181/images/${b.bannerImage}`}
+                      src={`https://brahmand.online:8181/images/${b.bannerImage}`}
                       className="md:h-14 md:w-24 h-8 w-12 object-cover bg-cover"
                       alt="Brand"
                     />
